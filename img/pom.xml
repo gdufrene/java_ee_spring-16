@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+<groupId>fr.eservices.xxVotreNomxx</groupId>
+<artifactId>jee-tpX</artifactId>
+<version>1.0-SNAPSHOT</version>
+<packaging>jar</packaging>
+
+<name>JEE - Projet master e-services - TP X</name>
+
+<build>
+  <!-- Si vous souhaitez modifier les répertoires de compilation et sources -->
+  <directory>WEB-INF/classes</directory>
+  <outputDirectory>WEB-INF/classes</outputDirectory>
+  <testOutputDirectory>bin</testOutputDirectory>
+  <sourceDirectory>WEB-INF/src</sourceDirectory>
+  <testSourceDirectory>WEB-INF/test</testSourceDirectory>
+</build>
+
+<dependencies>
+  
+  <!-- Running dependencies -->
+  <dependency>
+  	<groupId>javax.servlet</groupId>
+  	<artifactId>javax.servlet-api</artifactId>
+  	<version>3.1.0</version>
+  	<scope>provided</scope>
+  </dependency>
+  
+</dependencies>
+
+</project>

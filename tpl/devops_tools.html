@@ -1,0 +1,37 @@
+        <h2><a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Tooling.</h2>
+
+<h3>
+<a name="autres_outils" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>
+Autres 'outils' intéressants
+</h3>
+
+<p>
+  Un développeur se doit de maitriser quelques outils 'système' de base afin de faciliter son travail.<br/>
+  Avez-vous entendu parler du mouvement "<a href="http://fr.wikipedia.org/wiki/Devops">devops</a>" ?<br/>
+  Il me semble essentiel de vous familiariser à l'usage des commandes 'wget' et 'curl' qui sont extrêmement pratique pour télécharger des archives (ou toutes sortes de choses), et permet d'exécuter différents type de requêtes HTTP (utile en développement web).
+</p>
+
+<p>
+  Bash peut être configuré pour utiliser le proxy de l'université et permettre à wget / curl de fonctionner correctement.<br/>
+  Vérifiez que les variables 'http_proxy', 'https_proxy' et 'no_proxy' sont déclarées dans votre environnement en tapant `env` dans votre console (linux/mac).<br/>
+  Il faut ajouter quelques variables d'environnement à votre <i>.bashrc</i> ou votre <i>.bash_profile</i>.
+</p>
+
+<pre><code>
+export http_proxy=http://cache-etu.univ-lille1.fr:3128
+export https_proxy=https://cache-etu.univ-lille1.fr:3128
+export no_proxy=localhost,127.0.0.0/8,*.local
+</code></pre>
+
+<p>
+  <code>curl</code> est une commande permettant d'afficher le corps HTML d'une réponse d'un serveur web à une url. Cette commande permet également d'envoyer des données en POST ou en GET.
+</p>
+
+<p>
+  <code>wget</code> est une commande permettant de télécharger dans un fichier le "contenu" indiqué par une url. Cela peut être une page web, ou tout autre fichier.
+</p>
+
+<p>
+  Vous devriez prendre un peu de temps pour lire les pages "man" de ces deux commandes très utiles lorsque l'on fait du développement web.
+</p>
+

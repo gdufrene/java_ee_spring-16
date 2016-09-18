@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>JEE / Spring by gdufrene</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Java EE / Spring</h1>
+        <p>Master e-services 2016</p>
+        <p class="view"><a href="https://github.com/gdufrene/java_ee_spring-16">View the Project on GitHub <small>gdufrene/java_ee_spring-14</small></a></p>
+        <ul>
+          <li><a href="https://github.com/gdufrene/java_ee_spring-16/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/gdufrene/java_ee_spring-16/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/gdufrene/java_ee_spring-16">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+
+      <section>
+
+        <h2><a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Semaine 1.</h2>
+
+
+<p>
+  Clonez mon repository github "java_ee_spring-16".<br/>
+  Ce projet sera mis à jour au fur et à mesure des semaines avec les travaux pratiques à réaliser.
+</p>
+
+<pre><code>$ git clone https://github.com/gdufrene/java_ee_spring-16.git
+</code></pre>
+
+<h2>
+<a name="tools" class="anchor" href="#tools"><span class="octicon octicon-link"></span></a>
+Les outils
+</h2>
+
+<p>
+  J'ai fourni un script dans "tools" qui téléchargera les outils nécessaires pour ce cours.<br/>
+  Le script <code>install.sh</code> peut normalement s'exécuter sour linux ou mac.<br/>
+  Pour les utilisateurs sous windows, voici la liste des outils à télécharger :
+  <ul>
+    <li>Java : <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Java SE Development Kit 8uXXX</a>
+    </li>
+    <li>Tomcat : <a href="https://tomcat.apache.org/download-80.cgi">Tomcat 8.5.x Core Binary Distributions</a>
+    </li>
+    <li>Maven : <a href="https://maven.apache.org/download.cgi">Maven Binary 3.3.9 zip archive</a>
+    </li>
+    <li>Eclipse : <a href="https://eclipse.org/downloads/eclipse-packages/">Eclipse Neon (4.6) for Java EE Developers</a>
+    </li>
+  </ul>
+</p>
+
+
+<p>
+  <i class="bullet">i</i>
+  Pour quelques rappels concernant l'utilisation des commandes java <a href="java.html">lisez cette page</a>.
+</p>
+
+
+<div class="note">
+  <h5>Tester votre installation Java</h5>
+  Télécharger ce <a href="http://eservices.webpulser.com/check.jar">fichier check.jar</a>.<br/>
+  Exécuter ce jar et mettre en paramètre "init" suivi de votre prénom et votre nom.<br/>
+  exemple :
+  <code>
+    java -jar check.jar init "Guillaume" "Dufrêne"
+  </code>
+</div>
+
+
+<p>
+  <b style="color: red">Attention</b> : l'exécution de "check init" a créé un fichier ".myKeyFile" dans votre répertoire home qui est confidentiel et vous permettra de valider les exercices suivants. Conservez le en copie quelquepart !<br/>
+  Si vous utilisez un autre ordinateur par la suite, vous devez remettre ce fichier dans votre répertoire "home".<br/>
+  Le jar "check.jar" utilise le proxy de l'universtité par défaut. Si vous souhaitez en dehors de la fac, ajouter l'option "-DNoProxy" avant l'option "-jar".
+</p>
+
+<p>
+  <i class="bullet">i</i>
+  Suivez les consignes de "week101".
+</p>
+
+<div class="note">
+  <h5>Tester votre exercice</h5>
+  Placez vous dans le répertoire "week101".<br/>
+  Mettre "check.jar" dans "lib" afin de simplifier le lancement du test.<br/>
+  Exécuter la class boot.Main du jar check.jar en mettant junit, hamcrest et votre répertoire bin dans le classpath également, mettre en paramètre de la commande "week101".
+  <code>
+    java -cp "bin:lib/*" boot.Main week101
+  </code>
+</div>
+
+<p>
+  <i class="bullet">i</i>
+  Pour plus d'informations sur tomcat et son fonctionnement <a href="tomcat.html">lisez cette page</a>.
+</p>
+
+<p>
+  <i class="bullet">i</i>
+  Suivez les instructions de l'exercice "week102".
+</p>
+
+<div class="note">
+  <h5>Tester votre exercice</h5>
+  Placez vous dans le répertoire "webapps" de votre tomcat, celui-ci doit être lancé.<br/>
+  Exécuter le jar "check.jar" et mettre en paramètre "week102".<br/>
+  <code>
+    java -jar check.jar week102
+  </code>
+</div>
+
+<p>
+  <i class="bullet">i</i>
+  Pour débuter avec maven, lisez au moins le paragraphe d'<b>introduction</b> de <a href="maven.html">cette page</a>.
+</p>
+
+
+<div class="note">
+  <h5>Tester votre installation Java/Maven</h5>
+  Exécuter le jar "check.jar" et mettre en paramètre "check-mvn".<br/>
+  <code>
+    java -jar check.jar check-mvn
+  </code>
+</div>
+
+<p>
+  <i class="bullet">i</i>
+  Pour comprendre ou revoir le fonctionnement des servlet et JSP, <a href="servlet.html">rendez-vous sur cette page</a>.
+</p>
+
+
+<p>
+  <i class="bullet">i</i>
+  Vous devriez prendre un peu de temps à manipuler d'autres outils/commandes : <a href="devops_tools.html">lisez cette page</a>.
+</p>
+
+      <ul class="navigation">
+        <li>
+          <a href="index.html"><strong>Sommaire</strong></a>
+        </li>
+        <li>
+          <a href="sitemap.html"><strong>Plan du site</strong></a>
+        </li>
+        <li>
+          <a href="https://github.com/gdufrene/java_ee_spring-16"><strong>Github</strong></a>
+        </li>
+      </ul>
+
+    </section>
+
+    </div>
+
+    <footer>
+      <p>Project maintained by <a href="https://github.com/gdufrene">gdufrene</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+      <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Ce(tte) œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Licence Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International</a>.</p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+<script src="javascripts/jquery.js"></script>
+<script src="javascripts/jquery.collapse.js"></script>
+<script type="text/javascript">
+$(".collapsable").collapse();
+</script>
+
+    
+  </body>
+</html>

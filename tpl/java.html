@@ -1,0 +1,144 @@
+        <h2><a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Java.</h2>
+
+<p>
+  Nous allons tout d'abords installer un JDK java 1.8 si ce n'est pas déjà fait.<br/>
+  Vérifions si java est déjà installé.
+</p>
+
+  <pre><code>$ java -version
+  java version "1.7.0_25"
+  Java(TM) SE Runtime Environment (build 1.7.0_25-b15)
+  Java HotSpot(TM) 64-Bit Server VM (build 23.25-b01, mixed mode)
+  </code></pre>
+
+  <p>
+    Ceci indiquerait que la version 1.7 est installé, mais nous aimerions une version 1.8.
+    Rendez-vous sur <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Java SE Development Kit 8 Downloads</a> chez Oracle. Téléchargez et installez l'archive.
+  </p>
+  
+  
+
+<div class="collapsable">
+  <h2>Installer Java</h2>
+  <div>
+<p>
+  Il faudra déterminer quel est l'architecture de notre poste de travail.
+  Windows, Linux, Mac OS ?
+  Système 32 bits ou 64 bits ?
+</p>
+
+<pre><code>$ uname -a
+<b style="color: #F0F0C0">Darwin</b> webpulser-mbp.local <b style="color: #F0F0C0">11.4.2</b> Darwin Kernel Version 11.4.2: Thu Aug 23 16:25:48 
+PDT 2012; root:xnu-1699.32.7~1/RELEASE_X86_64 <b style="color: #F0F0C0">x86_64</b>
+</code></pre>
+
+<p>
+  Dans mon cas un mac équipé d'un processeur intel (x86) et 64 bits. La version 11.4.2 du noyau me permet de dire, après une petite recherche, qu'il s'agit de Mac OS X Lion. "A propos de ce mac" aurait aussi pu m'aider. Sous windows appuyer sur [Win]+[Pause] pour ouvrir les propriétés du poste de travail.
+</p>
+
+<p>
+  Il faudra idéalement ajouter le chemin des binaires java dans la variable d'environnement "PATH" du système. <a href="https://www.java.com/fr/download/help/path.xml">Modifiez le PATH</a>.
+</p>
+
+<p>
+  Le <b>PATH</b> est une liste de dossiers parcourus par le système pour trouver les commandes exécutables appelées sans en préciser le chemin complet.
+  lorsque vous taper "java" dans l'invite de commande, le système va rechercher dans chacun des dossiers, dans l'ordre ou ils sont définis, un fichier exécutable portant ce nom. Si un tel programme est trouvé il est lancé, sinon vous aurez une erreur du type "java: command not found."<br/>
+  Il est aussi possible d'appeler un programme en précisant son chemin complet. Si vous taper "/opt/jdk1.8.0_11/bin/java -version" c'est ce programme en particulier qui sera appelé (en supposant qu'il existe).
+</p>
+
+<p>
+  Le PATH est une chaine de caractère regroupant l'ensemble des dossier de recherche, séparés par un ':' sous linux/osx et par ';' sous windows.<br/>
+  Pour modifier ce PATH ;<br/>
+  Imaginons que j'utilise linux et que j'ai décompressé l'archive dans /opt, cela a du créer un répertoire jdk1.8.0_11.
+</p>
+
+  <pre><code>$ echo 'export PATH="/opt/jdk1.8.0_11/bin:$PATH"' >> ~/.bashrc
+$ . ~/.bashrc
+</code></pre>
+
+  Le fichier .bashrc contenu dans votre répertoire utilisateur est exécuté à chaque fois qu'un shell de type bash est lancé.
+<p>
+  Sous mac l'installation du package va se faire dans '/Library/Java/JavaVirtualMachines/jdk1.8.0_11.jdk/Contents/Home/'. Le fichier à modifier pour le PATH est '.bash_profile' dans le HOME.
+</p>
+
+<pre><code>$ echo 'export PATH="/Library/Java/JavaVirtualMachines/jdk1.8.0_11.jdk/Contents/Home/bin:$PATH"' >> ~/.bash_profile
+$ . ~/.bash_profile
+</code></pre>
+
+</div>
+</div>
+
+<div class="collapsable">
+  <h2>Compiler un source java</h2>
+  <div>
+<p>
+  Pour compiler un fichier il faut utiliser la commande "javac" suivi du source à compiler. 
+  La compilation transforme votre code source texte en une suite d'instructions et de données interprétable par la machine virtuelle java.
+  Ces fichiers compilés seront interprétables quelque soit le système d'exploitation utilisé: "Compile Once, Run Everywhere" (ou presque).
+</p>
+
+<p>
+  Sans options, cette commande créera des fichiers compilés à l'endroit où vous avez exécuté la commande.
+  Voici une petite liste d'option à connaitre :<br/>
+  <code>-d</code> suivi d'un répertoire permet d'indiquer où les ".class" doivent être créés.<br/>
+  <code>-sourcepath</code> indique l'endroit où rechercher les fichiers sources de l'utilisateur. Lorsque votre compilateur rencontre dans le source une classe qu'il ne connait pas, il essaiera de la rechercher et de la compiler depuis cet endroit<br/>
+  <code>-source</code> permet de s'assurer de la compatibilité des sources java pour une version minimale d'un compilateur. Il peut être en effet pratique d'utiliser cet option si vous possédez une version 1.8 alors que vos collègues utilisent la version 1.7 (et doivent recompiler vos sources)<br/>
+  <code>-target</code> permet de compiler du bytecode qui peut être lu et interprété par une JVM de cette version. La plupart des nouveautés syntaxique peuvent être compilées vers des versions de JVM inférieures. Les nouvelles versions du compilateur introduisent par contre des optimisations et une forme encodée des classes qui peuvent être différentes.<br/>
+  <code>-cp</code> permet de définir le <b>CLASSPATH</b>, c'est à dire la liste des répertoires et des jar contenant les classes nécessaires à la compilation de vos sources.
+</p>
+  </div>
+</div>
+
+
+<div class="collapsable">
+  <h2>Exécuter un programme java</h2>
+  <div>
+
+<p>
+  Pour exécuter votre programme il faut utiliser la commande "java" suivi d'une classe contenant une méthode "main" (sans l'extension .class).
+  C'est le point d'entrée de notre programme java. La signature de cette méthode doit être :<br/>
+  <code>public static void main(String[] args)</code><br/>
+  Les arguments passés à votre ligne de commande se retrouvent dans le tableau "args" (dont vous pouvez changer le nom évidemment).<br/>
+</p>
+
+<p>
+  Généralement, nous utilisons des "librairies" dont il faudra indiquer le chemin à la JVM pour que les classes dont vous faîtes référence dans votre programme puisse fonctionner. De nombreuses librairies sont chargées de base par la JVM tel que "rt.jar" contenant la définition de java.lang.Integer (et de la plupart des classes fournies avec la JVM).<br/>
+  Les fichiers jar ne sont que des archives "zip" dans lesquelles nous avons rangés nos classes et un fichier META-INF/MANIFEST.MF décrivant éventuellement des informations complémentaires sur le compilateur ou autre ...<br/>
+</p>
+
+<p>
+  Lorsqu'une classe est référencée par une autre, la JVM va en rechercher le code dans les librairies et les dossiers dont vous avez fourni la liste. C'est cette liste que l'on nomme le <b>CLASSPATH</b>, à ne pas confondre avec la variable d'environnement PATH.<br/>
+  Le CLASSPATH se défini à la compilation ou à l'exécution par l'option <code>-cp</code> suivi d'une chaine de caractère reprenant tous les dossiers et librairies dans lesquels la JVM ira chercher après les classes. Chaque dossier ou librairie sera séparé par un ":" sous mac et linux ou par un ";" sous windows.<br/>
+  Sans cette option la JVM ne recherche que dans le répertoire courant (celui dans lequel vous êtes en lançant java).<br/>
+</p>
+
+<p>
+  Vous avez peut être déjà remarqué qu'il est possible d'exécuter des fichiers jar ?<br/>
+  Quand vous double-cliquez dessus dans votre explorateur de fichier, par exemple...<br/>
+  Lorsque vous le faîtes, la commande <code>java -jar <i>fichier.jar</i></code> est en fait exécuter.<br/>
+  <code>-jar</code> indique à la JVM de rechercher dans ce jar après la classes principale à lancer. Cette recherche se fait dans le fichier MANIFEST dans lequel une "MainClass" doit être indiqué.
+</p>
+
+<p>
+  Il peut être utile de définir ou re-définir une variable d'environnement pour un programme java en particulier.<br/>
+  <code>-D</code> permet de définir une variable. la syntaxe est : <code>-D<b>maVariable</b>=<b>maValeur</b></code>.<br/>
+  c'est une manière de passer un paramètre optionnel à un programme java.
+</p>
+
+  </div>
+</div>
+
+<p>
+  Téléchargez <a href="files/TestJava.java">ce fichier source</a>, compilons et exécutons.
+  Le fichier source contient quelques nouveautés introduites dans Java 8 telles que les "lamda expressions", la nouvelle API Java Time pour manipuler les Dates, le "StringJoiner", les Streams. Cela ne compilera donc que si vous avez correctement installé le JDK8.  
+</p>
+
+<p>
+  Pour notre exemple minimaliste, une fois le fichier java compilé, exécutez simplement "java TestJava".
+</p>
+
+<p>
+  Si vous travailler sous OSX, je vous recommande d'installer <a href="http://brew.sh/">Homebrew</a> qui pourra sans doute vous aider. C'est un gestionnaire de paquets linux adaptés pour pouvoir fonctionner sous mac. Cela vous permettra d'installer des outils intéressants et utiles venant du monde linux.
+</p>
+
+

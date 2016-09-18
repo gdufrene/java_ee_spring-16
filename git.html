@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>JEE / Spring by gdufrene</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Java EE / Spring</h1>
+        <p>Master e-services 2016</p>
+        <p class="view"><a href="https://github.com/gdufrene/java_ee_spring-16">View the Project on GitHub <small>gdufrene/java_ee_spring-14</small></a></p>
+        <ul>
+          <li><a href="https://github.com/gdufrene/java_ee_spring-16/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/gdufrene/java_ee_spring-16/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/gdufrene/java_ee_spring-16">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+
+      <section>
+
+
+<h2>Git</h2>
+
+<p>
+Git est un logiciel libre de gestion de versions. Il permet de stocker un ensemble de fichiers en conservant la chronologie de toutes les modifications qui ont été effectuées dessus. Il permet notamment de retrouver les différentes versions d'un lot de fichiers connexes. <br/>
+Git a la particularité d'être décentralisé : les sources peuvent être stockées sur différents serveurs, chacun des serveurs pouvant évoluer à leur rythme.<br/>
+Git a été créé par Linus Torvalds, le papa de Linux.
+</p>
+
+<p>
+<ul><li>  Créer un compte et un projet sur <a href="https://bitbucket.org/">bitbucket</a>
+</li><li> initialiser git, dans votre contexte web (webapps/tp1) <br/>
+  <code>git init</code>
+</li><li> Ajouter un fichier ".gitignore" à la racine de votre projet git pour ne pas envoyer vos fichiers ".class". Ouvrir le fichier et y mettre :
+  <pre><code>
+*.class
+*~
+</code></pre>
+</li><li> Ajouter le reste de vos fichiers<br/>
+  <code>git add .</code>
+</li><li> Vérifiez le status des fichiers qui vont être ajouté à votre commit <br/>
+  <code>git status</code>
+</li><li> Faîtes un commit<br/>
+  <code>git commit -m "Mon premier commit"</code>
+</li><li> Ajouter bitbucket comme serveur de source<br/>
+  <code>git remote add origin https://xxUSERxx@bitbucket.org/xxUSERxx/xxPROJETxx.git</code>
+</li><li> Pousser vos modifications sur bitbucket<br/>
+  <code>git push -u origin --all</code>
+</li></ul>
+</p>
+
+<p>
+  Depuis l'université vous devez utilisé le protocole HTTPS en passant par le proxy.<br/>
+  Cela nécessite de saisir votre mot de passe bitbucket lorsque vous ferez un <code>git pull</code> ou un <code>git push</code>.<br/>
+  De chez vous (ou ailleurs) vous pourriez utiliser le protocol ssh pour communiquer avec bitbucket.<br/>
+
+<p>
+  Consultez la <a href="http://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository">documentation</a> en cas de soucis.
+</p>
+
+<h3>Git et ssh</h3>
+
+<p>
+  Git utilise normalement le protocol ssh pour échanger des fichiers entre le serveur et votre ordinateur.<br/>
+  Pour utiliser ce protocol avec git vous devez tout d'abords générer une clé ssh si vous n'en avez pas déjà une.<br/>
+  <code>ssh-keygen</code><br/>
+  Laissez les paramètres par défaut et ne mettez pas de passphrase à votre clé.<br/>
+</p>
+
+<p>
+  Dans bitbutcket il faut associer la clé généré à votre compte. Cela ce passe dans votre profil (en haut à droite) sous "manage account"<br/>
+  Ouvrez le sous-menu "SSH Keys" et ajoutez une clé<br/>
+  Copier/Coller le contenu du fichier <code>~/.ssh/id_rsa.pub</code> (ou id_dsa.pub selon le système)<br/>
+</p>
+
+<p>
+  Votre système et votre compte bitbucket sont maintenant configurés pour utiliser ssh.<br/>
+  vous devriez être en mesure d'utiliser les URL de type "git@bitbucket.org:xxUSERxx/xxPROJETxx.git" sans utiliser de mot de passe.<br/>
+</p>
+
+<h3>Git et windows</h3>
+
+<p>
+  git n'est pas disponible nativement sous windows. Souvenez-vous qu'il a été créé par Linus Torvalds ;-)<br/>
+  Il existe plusieurs alternatives pour utiliser git sous windows, dont :<br/>
+  <a href="https://code.google.com/p/tortoisegit/">tortoiseGit</a> et <a href="http://msysgit.github.io/">msysgit</a>
+</p>
+
+<p>
+  Après avoir installé ces outils vous devriez retrouver les fonctionnalités de clone, add, commit, push et autre ...<br/>
+  tortoise offre tout cela de manière plus graphique alors que msysgit utilise une console (un bash dans un cygwin minimaliste).
+</p>
+
+
+      <ul class="navigation">
+        <li>
+          <a href="index.html"><strong>Sommaire</strong></a>
+        </li>
+        <li>
+          <a href="sitemap.html"><strong>Plan du site</strong></a>
+        </li>
+        <li>
+          <a href="https://github.com/gdufrene/java_ee_spring-16"><strong>Github</strong></a>
+        </li>
+      </ul>
+
+    </section>
+
+    </div>
+
+    <footer>
+      <p>Project maintained by <a href="https://github.com/gdufrene">gdufrene</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+      <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Ce(tte) œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Licence Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International</a>.</p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+<script src="javascripts/jquery.js"></script>
+<script src="javascripts/jquery.collapse.js"></script>
+<script type="text/javascript">
+$(".collapsable").collapse();
+</script>
+
+    
+  </body>
+</html>

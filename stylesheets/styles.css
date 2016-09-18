@@ -486,3 +486,14 @@ h2.open + div {
   border-radius: 0 0 5px 5px;
   margin-bottom: 20px;
 }
+
+i.bullet {
+    background-color: #069;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    width: 20px;
+}
