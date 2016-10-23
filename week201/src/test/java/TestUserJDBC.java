@@ -20,9 +20,10 @@ public class TestUserJDBC {
 		testUser = createUser("test1", "test2", "testPwd");
 	}
 	
+	@Before
 	@After
 	public void clear() throws Exception {
-		TestHelper.getDataSource()
+		TestHelper
 			.getConnection()
 			.createStatement()
 			.executeUpdate("delete from user where email like '%@test.com'");
@@ -38,7 +39,7 @@ public class TestUserJDBC {
 	}
 	
 	private boolean oneLineExists(String query) throws SQLException {
-		return TestHelper.getDataSource()
+		return TestHelper
 			.getConnection()
 			.createStatement()
 			.executeQuery(query)
@@ -48,11 +49,11 @@ public class TestUserJDBC {
 	@Test
 	public void create_Nominal() throws SQLException {
 		assertFalse(
-			oneLineExists("select 1 from user where email = 'test1.test2@test.com'")
+			oneLineExists("select 1 from user where email = 'A.B@test.com'")
 		);
-		dao.create( testUser );
+		dao.create( createUser("A", "B", "C") );
 		assertTrue(
-			oneLineExists("select 1 from user where email = 'test1.test2@test.com'")
+			oneLineExists("select 1 from user where email = 'A.B@test.com'")
 		);
 	}
 	
@@ -77,10 +78,10 @@ public class TestUserJDBC {
 	@Test
 	public void find_Nominal() {
 		dao.create(testUser);
-		User user = dao.find("test@test.com");
-		assertEquals("testPrenom", user.getPrenom());
-		assertEquals("testNom", user.getNom());
-		assertEquals("test@test.com", user.getMail());
+		User user = dao.find("test1.test2@test.com");
+		assertEquals("test1", user.getPrenom());
+		assertEquals("test2", user.getNom());
+		assertEquals("test1.test2@test.com", user.getMail());
 		assertEquals("testPwd", user.getMotDePasse());
 	}
 	

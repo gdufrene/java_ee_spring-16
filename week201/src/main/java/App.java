@@ -12,11 +12,12 @@ public class App {
 		*/
 		
 		UserJDBCDao dao = new UserJDBCDao();
-		// dao.setDataSource(ds);
+		// dao.setConnection(ds.getConnection());
 			
 		User user = new User();
 		// TODO : map user properties ...
 		
 		dao.create(user);
+		
 	}
 }

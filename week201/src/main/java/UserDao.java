@@ -5,6 +5,7 @@ public interface UserDao {
 	public void delete(String email);
 	public void create(User user);
 	public void update(User user);
+
 	public boolean checkPassword(String email, String password);
 	
 }

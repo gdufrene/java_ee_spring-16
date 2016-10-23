@@ -2,14 +2,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.sql.DataSource;
-
 public class UserJDBCDao implements UserDao {
 	
-	DataSource dataSource;
+	Connection conn;
 	
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
+	public void setConnection(Connection connection) {
+		this.conn = connection;
 	}
 
 	public User find(String email) {
@@ -20,7 +18,6 @@ public class UserJDBCDao implements UserDao {
 		
 		Connection conn = null;
 		try {
-			conn = dataSource.getConnection();
 			ResultSet rs = conn.createStatement().executeQuery( query );
 			
 			// TODO : use resultSet, map to User;
@@ -29,10 +26,6 @@ public class UserJDBCDao implements UserDao {
 			rs.close();
 		} catch ( SQLException e ) {
 			throw new Error("Unable to find User " + email, e);
-		} finally {
-			try {
-				if ( conn != null ) conn.close();
-			} catch (SQLException e) { }
 		}
 		
 		return user;
@@ -42,16 +35,10 @@ public class UserJDBCDao implements UserDao {
 		// TODO : complete query
 		String query = "DELETE FROM ...";
 		
-		Connection conn = null;
 		try {
-			conn = dataSource.getConnection();
 			conn.createStatement().executeUpdate(query);
 		} catch(SQLException e) {
 			throw new Error("Unable to delete User " + email, e);
-		} finally {
-			try {
-				if ( conn != null ) conn.close();
-			} catch (SQLException e) { }
 		}
 	}
 
@@ -59,16 +46,10 @@ public class UserJDBCDao implements UserDao {
 		// TODO : complete query
 		String query = "INSERT INTO ...";
 		
-		Connection conn = null;
 		try {
-			conn = dataSource.getConnection();
 			conn.createStatement().executeUpdate(query);
 		} catch(SQLException e) {
 			throw new Error("Unable to insert User " + user, e);
-		} finally {
-			try {
-				if ( conn != null ) conn.close();
-			} catch (SQLException e) { }
 		}
 	}
 
@@ -76,16 +57,10 @@ public class UserJDBCDao implements UserDao {
 		// TODO : complete query
 		String query = "UPDATE ... SET ...";
 		
-		Connection conn = null;
 		try {
-			conn = dataSource.getConnection();
 			conn.createStatement().executeUpdate(query);
 		} catch(SQLException e) {
 			throw new Error("Unable to insert User " + user, e);
-		} finally {
-			try {
-				if ( conn != null ) conn.close();
-			} catch (SQLException e) { }
 		}
 	}
 
@@ -95,10 +70,9 @@ public class UserJDBCDao implements UserDao {
 		String query = "SELECT ... WHERE ...";
 		
 		try {
-			Connection conn = dataSource.getConnection();
 			ResultSet rs = conn.createStatement().executeQuery(query);
 			boolean exists = rs.next();
-			conn.close();
+			rs.close();
 			return exists;
 		} catch(SQLException e) {
 			throw new Error("Unable to identified User " + email, e);
