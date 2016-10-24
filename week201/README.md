@@ -19,15 +19,15 @@ Vous avez ensuite à votre disposition un interpréteur SQL pour créer vos tabl
 Pour ce TP nous utiliserons le schéma suivant :
 
 create table user(
+  email     varchar(100) primary key,
   lastname  varchar(80),
   firstname varchar(80),
-  email     varchar(100),
   pwd       varchar(45)
 );
 
 Ajouté aussi cet enregistrement :
 
-insert into user values( "testNom", "testPrenom", "test@test.com", "testPwd");
+insert into user values( "mark.zuckerberg@facebook.com", "Zuckerberg", "Marck", "f4c3b00k");
 
 Pour quitter l'interpréteur utilisez [CTRL]+D ou la commande ".quit"
 
