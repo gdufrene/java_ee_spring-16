@@ -1,6 +1,9 @@
+package user.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import user.model.User;
 
 public class UserJDBCDao implements UserDao {
 	

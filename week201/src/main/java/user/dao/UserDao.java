@@ -1,3 +1,5 @@
+package user.dao;
+import user.model.User;
 
 public interface UserDao {
 

@@ -8,6 +8,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import user.dao.UserDao;
+import user.model.User;
+
 public class TestUserJDBC {
 
 	UserDao dao;

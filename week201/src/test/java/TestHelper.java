@@ -5,6 +5,9 @@ import javax.sql.DataSource;
 
 import org.sqlite.SQLiteDataSource;
 
+import user.dao.UserDao;
+import user.dao.UserJDBCDao;
+
 public class TestHelper {
 	
 	private static Connection connection;
