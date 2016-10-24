@@ -3,6 +3,8 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.sqlite.SQLiteDataSource;
+
 public class TestHelper {
 	
 	private static Connection connection;
@@ -16,11 +18,10 @@ public class TestHelper {
 	public static Connection getConnection() throws SQLException {
 		if ( connection != null ) return connection;
 		DataSource ds = null;
-		/*
 		SQLiteDataSource sqLiteSource = new SQLiteDataSource();
 		sqLiteSource.setUrl("jdbc:sqlite:data.db");
 		sqLiteSource.setLockingMode("NORMAL");
-		*/
+		ds = sqLiteSource;
 		
 		return ( connection = ds.getConnection() );
 	};
