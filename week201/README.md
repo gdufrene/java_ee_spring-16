@@ -27,7 +27,7 @@ create table user(
 
 Ajouté aussi cet enregistrement :
 
-insert into user values( "mark.zuckerberg@facebook.com", "Zuckerberg", "Marck", "f4c3b00k");
+insert into user values( "mark.zuckerberg@facebook.com", "Zuckerberg", "Mark", "f4c3b00k");
 
 Pour quitter l'interpréteur utilisez [CTRL]+D ou la commande ".quit"
 

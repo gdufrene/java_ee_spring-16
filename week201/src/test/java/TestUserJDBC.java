@@ -78,7 +78,7 @@ public class TestUserJDBC {
 	@Test
 	public void find_Nominal() {
 		User user = dao.find("mark.zuckerberg@facebook.com");
-		assertEquals("Marc", user.getPrenom());
+		assertEquals("Mark", user.getPrenom());
 		assertEquals("Zuckerberg", user.getNom());
 		assertEquals("mark.zuckerberg@facebook.com", user.getMail());
 		assertEquals("f4c3b00k", user.getMotDePasse());
