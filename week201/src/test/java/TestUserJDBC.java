@@ -59,7 +59,7 @@ public class TestUserJDBC {
 	
 	@Test
 	public void update_Nominal() throws SQLException {
-		dao.create( testUser );
+		TestHelper.updateDb("insert into user(email, pwd) values('test1.test2@test.com', 'testPwd')");
 		testUser.setMotDePasse("newPassword");
 		testUser.setPrenom("newPrenom");
 		testUser.setNom("newNom");
@@ -87,7 +87,7 @@ public class TestUserJDBC {
 	
 	@Test
 	public void delete_Nominal() throws SQLException {
-		dao.create(testUser);
+		TestHelper.updateDb("insert into user(email) values('test1.test2@test.com')");
 		dao.delete("test1.test2@test.com");
 		assertFalse(
 			oneLineExists("select 1 from user where email = 'test1.test2@test.com'")
@@ -95,21 +95,21 @@ public class TestUserJDBC {
 	}
 	
 	@Test
-	public void checkPassword_Nominal() {
-		dao.create(testUser);
+	public void checkPassword_Nominal() throws SQLException {
+		TestHelper.updateDb("insert into user(email, pwd) values('test1.test2@test.com', 'testPwd')");
  		assertTrue( dao.checkPassword("test1.test2@test.com", "testPwd") );
  		assertFalse( dao.checkPassword("test1.test2@test.com", "__testPwd__") );
 	}
 	
 	@Test
-	public void checkPassword_Inject1() {
-		dao.create(testUser);
+	public void checkPassword_Inject1() throws SQLException {
+		TestHelper.updateDb("insert into user(email, pwd) values('test1.test2@test.com', 'testPwd')");
  		assertFalse( dao.checkPassword("test1.test2@test.com", "' OR '1' = '1") );
 	}
 	
 	@Test
-	public void checkPassword_Inject2() {
-		dao.create(testUser);
+	public void checkPassword_Inject2() throws SQLException {
+		TestHelper.updateDb("insert into user(email, pwd) values('test1.test2@test.com', 'testPwd')");
  		assertFalse( dao.checkPassword("noMatch' UNION SELECT 'anypassword', 'anypassword', 'anypassword', 'anypassword", "anypassword") );
 	}
 	

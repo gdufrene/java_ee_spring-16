@@ -26,4 +26,10 @@ public class TestHelper {
 		return ( connection = ds.getConnection() );
 	};
 	
+	public static int updateDb(String sql) throws SQLException {
+		return getConnection()
+			.createStatement()
+			.executeUpdate(sql);
+	}
+	
 }
