@@ -17,6 +17,8 @@ Une dépendance vers user-api est définie, toutes les dépendances transitives 
 
 ## Identification
 
+Il faudra sans doute modifier votre DataSource pour charger le fichier "data.db" ailleurs que dans le répertoire courant, interprété comme "le répertoire dans lequel vous êtes au moment de lancer tomcat". Ce pourrait ne pas etre pratique d'avoir ce fichier dans le "/bin" de tomcat, et ce ne semble pas être une super idée de le laisser dans le "/WEB-INF" de votre contexte.
+
 à partir du fichier html fourni dans src/main/webapps/login.html, faire une jsp qui sera dans src/main/webapps/WEB-INF/views/user/login.jsp.
 
 Compléter la servlet AuthControl que vous brancherez sur l'URL "/auth". Cette servlet tentera d'identifier l'utilisateur.
