@@ -60,7 +60,7 @@ public class AuthCheck {
 	}
 	
 	@Test
-	public void blockInvalidUser_noRedirect(String[] args) throws IOException {
+	public void blockInvalidUser_noRedirect() throws IOException {
 		postInvalidUser("invalid.user@mail.com");
 		assertEquals("Authent should failed with test user. (no-redirect)", 
 				200, web.code() 
@@ -68,7 +68,7 @@ public class AuthCheck {
 	}
 	
 	@Test
-	public void blockInvalidUser_noShowErrorMessage(String[] args) throws IOException {
+	public void blockInvalidUser_noShowErrorMessage() throws IOException {
 		String result = postInvalidUser("invalid.user@mail.com");
 		assertTrue("Authent show a message on error", 
 				result.contains("alert alert-danger")
@@ -76,7 +76,7 @@ public class AuthCheck {
 	}
 	
 	@Test
-	public void blockInvalidUser_keepMailField(String[] args) throws IOException {
+	public void blockInvalidUser_keepMailField() throws IOException {
 		String result = postInvalidUser("invalid.user@mail.com");
 		assertTrue("Authent keep user email in textfield on error.",
 				result.contains("value=\"invalid.user@mail.com\"")
