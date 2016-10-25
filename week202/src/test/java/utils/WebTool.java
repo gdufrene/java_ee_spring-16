@@ -16,7 +16,7 @@ public class WebTool {
 		if ( System.getProperty("NoProxy") == null ) {
 			System.setProperty("http.proxyHost", "cache-etu.univ-lille1.fr");
 			System.setProperty("http.proxyPort", "3128");
-			System.setProperty("http.nonProxyHosts", "localhost|127.*|[::1]");
+			System.setProperty("http.nonProxyHosts", "localhost|127.0.0.1|[::1]");
 		}
 	}
 	

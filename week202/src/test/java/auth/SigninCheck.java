@@ -123,6 +123,7 @@ public class SigninCheck {
 	public void checkSigninServlet_showErrorParam() throws IOException {
 	//  - it shows error on empty or null field
 		doMissingFieldsRequests( (field, code, content, err) -> {
+			assertEquals(200, code);
 			int i = content.indexOf("name=\""+field+"\"");
 			if ( i > 0 ) {
 				int j = 0;
