@@ -79,10 +79,16 @@ Afin de le pas encombrer votre compte unix avec ces fichiers, je vous recommande
 </p>
 
 <code><pre>
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org2001/XMLSchema-instance&quot;
+           xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apahe.org/xsd/maven-4.0.0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+      
   &lt;groupId&gt;fr.eservices.<b>xxVotreNomxx</b>&lt;/groupId&gt;
   &lt;artifactId&gt;projet-jee&lt;/artifactId&gt;
   &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
   &lt;packaging&gt;war&lt;/packaging&gt;
+
+&lt;project&gt;
 </pre></code>
 
 <p>
@@ -96,7 +102,7 @@ Afin de le pas encombrer votre compte unix avec ces fichiers, je vous recommande
 
 <p>
   Les dépendances seront stockée sur votre ordinateur dans un repository local, par défaut dans ~/.m2/repository.<br/>
-  Il est possible d'ajouter manuellement des librairies dans ce repository. Ce qui peut être utile pour les librairies qui ne sont pas fourni au format maven (avec un pom ou sur le repo central ...).<br/>
+  Il est possible d'ajouter manuellement des librairies dans ce repository. Ce qui peut être utile pour les librairies qui ne sont pas fournies au format maven (avec un pom ou sur le repo central ...).<br/>
 </p>
 
 <p>
@@ -113,11 +119,36 @@ Afin de le pas encombrer votre compte unix avec ces fichiers, je vous recommande
 <p>
   Il faut distinguer différents ensembles de dépendances, nommées "scope" dans le vocabulaire maven.<br/>
 
-  &raquo; <i>compile</i> : (par défaut) indique que cette librairie est nécessaire pour la compilation et à l'exécution. <br/>
-  &raquo; <i>runtime</i> : uniquement nécessaire à l'exécution.<br/>
-  &raquo; <i>provided</i> : sera disponible à l'exécution mais n'est pas fourni par ce projet. Exemple : le "servlet-api" est fourni par tomcat et n'est pas amené par notre projet web. "servlet-api" est donc "provided". Cette librairie reste nécessaire à la compilation.<br/>
-  &raquo; <i>test</i> : librairie nécessaire uniquement dans l'exécution de tests unitaires. Exemple : junit.<br/>
+  &raquo; <b>compile</b> : (par défaut) indique que cette librairie est nécessaire pour la compilation et à l'exécution. <br/>
+  &raquo; <b>runtime</b> : uniquement nécessaire à l'exécution.<br/>
+  &raquo; <b>provided</b> : sera disponible à l'exécution mais n'est pas fourni par ce projet. Exemple : le "servlet-api" est fourni par tomcat et n'est pas amené par notre projet web. "servlet-api" est donc "provided". Cette librairie reste nécessaire à la compilation.<br/>
+  &raquo; <b>test</b> : librairie nécessaire uniquement dans l'exécution de tests unitaires. Exemple : junit.<br/>
+  &raquo; <b>system</b> : librairie disponible à travers le système de fichier local. Ce type de dépendance n'est pas tiré depuis les repository distants. A éviter, sauf si vous comitter vos librairies avec le projet (c'est mal ...)
 </p>
+
+<p>
+  Maven gère le classpath pour vous lors des phases de compilation et d'exécution.<br/>
+  Les dépendances directes et transitives sont toutes ajoutées au classpath.<br/>
+  Les dépendances "compile", "runtime" sont transitives. Le scope "test" est par contre limité à votre projet.
+</p>
+
+<p>
+  Les dépendances se gèrent dans la sections "dependencies". Pour Chaque dépendance, il faut indiquer le groupId, l'artifactId, la version et le scope (par défaut compile).<br/>
+  Exemple de dépendance pour ajouter junit pour nos tests :
+</p>
+
+<pre>
+  &lt;dependencies&gt; 
+    ...
+    &lt;dependency&gt; 
+      &lt;groupId&gt;junit&lt;/groupId&gt; 
+      &lt;artifactId&gt;junit&lt;/artifactId&gt; 
+      &lt;version&gt;4.12&lt;/version&gt; 
+      &lt;scope&gt;test&lt;/scope&gt; 
+    &lt;/dependency&gt; 
+    ...
+  &lt;/dependencies&gt;
+</pre>
 
 <h3>Structure des dossiers</h3>
 
@@ -129,7 +160,7 @@ Afin de le pas encombrer votre compte unix avec ces fichiers, je vous recommande
           <li>main
           <ul>
             <li>java : les sources principales</li>
-            <li>resources : les fichiers de configuration et autre, inclus dans la librairie</li>
+            <li>resources : les fichiers de configuration et autre. Tout sera inclus dans la librairie (donc dans le accessible via le classpath)</li>
             <li>webapp (dans le cas d'un war) : les fichiers, autres que les class et resources, inclus dans le war</li>
           </ul>
           </li>
@@ -155,6 +186,97 @@ Afin de le pas encombrer votre compte unix avec ces fichiers, je vous recommande
   Rappel : Vous pouvez modifier votre .m2/settings.xml pour modifier l'emplacement où maven rangera toutes les dépendances.<br/>
   Visualisez l'arbre des dépendances avec <code>mvn dependency:tree</code>.
 </p>
+
+<h3> Déployer votre artefact </h3>
+
+Pour mettre à disposition votre artefact il suffit de l'héberger sur un serveur accessible en http et organisé de la même manière que votre repository local.<br/>
+Maven vous permet de déployer selon différents modes de distribution avec des extensions :
+<ul>
+ <li> copie dans un répertoire local (qui serait exposé avec apache par exemple), </li>
+ <li> A travers une connexion FTP </li>
+ <li> Copie avec le protocol SSH </li>
+ <li> Copie avec le protocol HTTP : suppose que vous ayez un serveur webdav ou une application web compatible comme Nexus </li>
+</ul>
+
+La configuration se fait dans la directive "distributionManagement", voici un exemple.
+
+<pre>
+&lt;distributionManagement&gt; 
+  &lt;repository&gt; 
+    &lt;id&gt;id-repository&lt;/id&gt;
+    &lt;url&gt;ftp://server/path&lt;/url&gt;
+  &lt;/repository&gt; 
+&lt;/distributionManagement&gt;
+</pre>
+
+Chaque mode de distribution est pris en charge par une extension, à configurer dans "build" :
+
+<pre>
+&lt;build&gt; 
+  &lt;extensions&gt; 
+    &lt;extension&gt; 
+      &lt;groupId&gt;org.apache.maven.wagon&lt;/groupId&gt;
+      &lt;artifactId&gt;wagon-ftp&lt;/artifactId&gt;
+      &lt;version&gt;1.0-beta-6&lt;/version&gt; 
+    &lt;/extension&gt; 
+  &lt;/extensions&gt; 
+&lt;/build&gt;
+</pre>
+
+Les login et mot de passe de connexion ne sont pas à mettre dans le pom.xml (ce fichier étant publique). Vous devez ajouter un "server" dans votre fichier settings.xml :<br>
+
+<pre>
+&lt;settings&gt; 
+... 
+  &lt;servers&gt; 
+    &lt;server&gt; 
+      &lt;id&gt;id-repository&lt;/id&gt; 
+      &lt;username&gt;yourLogin&lt;/username&gt; 
+      &lt;password&gt;yourPassword&lt;/password&gt; 
+    &lt;/server&gt; 
+  &lt;/servers&gt; 
+... 
+&lt;/settings&gt;
+</pre>
+
+<h3>Ajouter un repository</h3>
+
+<p>
+  Sans configuration particulière, maven recherche d'abord les artefact dans votre repository local, puis dans le repository central maven (https://repo.maven.apache.org/maven2).<br/>
+  Il est possible de modifier votre configuration globale pour ajouter un repository dans le settings.xml, mais ce repository sera utiliser pour tous vos projets, ce n'est pas nécessairement une solution idéale.<br/>
+  Il est aussi possible d'ajouter un repository dans le pom de votre projet dans la section "repositories".<br/>
+  Voici un exemple, que vous pourrez adapter ...
+</p>
+
+<pre>
+&lt;repository&gt; 
+  &lt;id&gt;id-repository&lt;/id&gt; 
+  &lt;name&gt;Name of your repository&lt;/name&gt; 
+  &lt;url&gt;http://host:port/path/to/maven/&lt;/url&gt; 
+  &lt;snapshots&gt; 
+    &lt;enabled&gt;true&lt;/enabled&gt; 
+  &lt;/snapshots&gt; 
+&lt;/repository&gt;
+</pre>
+
+<p>
+  la notion de "snapshot" indique à maven que les versions d'artefact "-SNAPSHOT" seront mise à jour. Il lui sera nécessaire de vérifier la dernière version disposible de l'artefact de temps en temps afin de mettre votre repository à jour.<br/>
+  Les versions "stable" d'artefact ne sont pas sensé changer. Une fois l'artefact déployé sur un repository, vous devriez immédiatement l'augmenter de version et lui ajouter le suffixe -SNAPSHOT.<br/>
+  Maven ne téléchargera pas un artefact "stable" qu'il possède en local.<br/>
+</p>
+
+<p>
+  Lorsque vous re-définissez les repositories dans votre pom vous devrez aussi ajouter le central maven, sinon seul votre nouveau repository sera consulté. Le central maven peut être ajouté comme un autre repository à la liste :
+</p>
+
+<pre>
+&lt;repository&gt; 
+  &lt;id&gt;central2&lt;/id&gt; 
+  &lt;name&gt;Maven Central repo&lt;/name&gt; 
+  &lt;url&gt;http://central.maven.org/maven2/&lt;/url&gt; 
+&lt;/repository&gt;
+</pre>
+
 
 <h3>Le plugin maven d'eclipse</h3>
 

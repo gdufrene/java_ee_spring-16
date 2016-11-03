@@ -17,9 +17,13 @@ gen maven
 gen tomcat
 gen devops_tools
 gen git
+gen jdbc
+gen jpa
 
 gen servlet
 
 gen week1
+
+gen week2
 
 gen sitemap
