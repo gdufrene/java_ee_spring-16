@@ -43,7 +43,7 @@ JPA est essentiellement utilisé pour la manipulation des bases de données rela
 En fonction de la persistance choisie, l'implémentation JPA pour votre base se chargera de traduire ces appels en SQL (ou autre) valide.
 </p>
 
-<h2>Hibernate</h2>
+<h3>Hibernate</h3>
 
 <p>
 Essayons de mettre en oeuvre une persistance JPA avec l'implémentation Hibernate par dessus une base de données "H2".
@@ -53,7 +53,7 @@ Essayons de mettre en oeuvre une persistance JPA avec l'implémentation Hibernat
 Hibernate est un "gros" framework qui implémente les fonctionnalités de JPA. Il possède un nombre assez important de dépendances. Il devient assez vite compliqué de vouloir chercher toutes ces dépendances "à la main". Nous allons plutôt utiliser maven pour gérer tout cela.<br/>
 </p>
 
-<h2>Premières entités</h2>
+<h3>Premières entités</h3>
 
 <p>
   Avec JPA, nous pouvons annoter nos classes JAVA pour indiquer que les données de ces classes seront persistées. De manière simple, il "suffit" de placer l'annotation <code class="ann">@Entity</code> sur une classe pour que cela fonctionne ... ou presque. Il est nécessaire que les propriétés de l'objet à persister soient accessibles par le gestionnaire d'entité.
@@ -69,6 +69,8 @@ Hibernate est un "gros" framework qui implémente les fonctionnalités de JPA. I
 <p>
   Pour certaines propriétés, il est utile de mettre d'autres annotations pour indiquer comment le gestionnaire ou la base se comportera. Par exemple l'identifiant de l'entité doit être annoté <code class="ann">@Id</code>. Nous pouvons aussi indiquer que cette propriété sera générée par la base via une séquence (ou auto increment). Pour cela nous ajoutons la propriété <code class="ann">@GeneratedValue</code>
 </p>
+
+<h3>Les associations</h3  >
 
 <p>
   Pour marquer les relations entre nos entités il est possible d'utiliser les annotations :<br/>

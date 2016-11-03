@@ -1,0 +1,41 @@
+        <h2><a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Semaine 2.</h2>
+
+<h2>
+<a name="tools" class="anchor" href="#tools"><span class="octicon octicon-link"></span></a>
+Maven / JDBC
+</h2>
+
+<p>
+  <i class="bullet">i</i> Pour les prochains exercices nous allons utiliser maven, vous devriez prendre le temps de lire, ou relire
+  <a href="maven.html">cette page</a>.<br/>
+  Des rappels concernant l'utilisation de <a href="jdbc.html">JDBC</a> ne vous seront également pas de trop ...
+</p>
+
+<p>Suivez les consignes de la partie week201</p>
+
+<p>
+    Télécharger ce <a href="http://eservices.webpulser.com/check.jar">fichier check.jar</a>.<br/>
+    Installer ce jar dans votre repository local.<br/>
+    Ajouter cet artefact comme dépendance dans votre pom, en scope test<br/>
+</p>
+
+<div class="note">
+  <h5>Tester votre programme.</h5>
+  Exécuter la classe boot.Main avec les dépedances de test :<br/>
+  <code>
+    mvn -q exec:java -Dexec.mainClass=boot.Main -Dexec.classpathScope=test -Dexec.arguments=week201
+  </code><br/>
+  ajoutez l'option <code>-DNoProxy</code> si vous n'êtes pas sur le réseau de l'université.
+</div>
+
+<p>
+  Déployer votre artefact sur le repository "172.28.1.99",<br/>
+  en ftp avec le login "eservices" et le mot de passe donné en TP.<br/>
+  Vous allez réaliser une page web d'authentification et de création d'utilisateur.<br/>
+  Pour la suite du TP vous utiliserez l'artefact créé par votre voisin...
+</p>
+
+<p>Suivez les consignes de la partie week202</p>
+
+
+
