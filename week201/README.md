@@ -1,7 +1,7 @@
 # Maven / JDBC
 
 Nous allons tester JDBC avec une base minimaliste nommée "sqlite".
-sqlite est fourni avec votre distribution linux, et souvent avec Mac OS x. Sous windows vous pouvez télécharger cette archive contenant une version pré-compilée.
+sqlite est fourni avec votre distribution linux, et souvent avec Mac OS x. Sous windows vous pouvez télécharger <a href="https://sqlite.org/2016/sqlite-dll-win64-x64-3150100.zip">cette archive</a> contenant une version pré-compilée.
 C'est une base de données relationnelle "classique" qui a au moins trois avantages :
 
 * c'est simple
@@ -25,7 +25,7 @@ create table user(
   pwd       varchar(45)
 );
 
-Ajouté aussi cet enregistrement :
+Ajoutez aussi cet enregistrement :
 
 insert into user values( "mark.zuckerberg@facebook.com", "Zuckerberg", "Mark", "f4c3b00k");
 
@@ -87,4 +87,5 @@ Configurer votre projet pour déployer sur :
 * ftp://172.28.1.99
 * user : eservices
 * password : (donné en TP)
+
 

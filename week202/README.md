@@ -1,4 +1,8 @@
-# Premier projet web avec maven et JDBC
+
+# JDBC + JSP
+
+
+## Premier projet web avec maven et JDBC
 
 Un pom a été préparé pour vous, jetez-y un coup d'oeil.
 
@@ -9,7 +13,8 @@ Le packaging du projet et défini comme "war", maven s'attend donc à trouver un
 La propriété failOnMissingWebXml permet d'indiquer que nous ne considérons pas le fait de ne pas avoir de fichier web.xml comme une Erreur. Les nouvelles versions des spécifications servlet et les nouveaux serveurs web java ne nécessitent plus forcement d'avoir ce fichier.
 
 Les propriétés sont aussi accessible en les entourant de ${...}.  
-Maven expose les variables d'environnement dans ${env.xxxx}. La variable USER est donc ici utilisée pour compléter le nom du groupId.
+Maven expose les variables d'environnement dans ${env.xxxx}. La variable USER est donc ici utilisée pour compléter le nom du groupId.  
+Vous pouvez la remplacer par votre nom, ou autre, si le contenu de la variable USER ne vous convient pas.
 
 La librairie servlet-api étant fournie avec tomcat, son scope peut être positionnée à "provided".
 
