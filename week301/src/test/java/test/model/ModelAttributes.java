@@ -8,6 +8,7 @@ import org.junit.Test;
 import fr.eservices.soaring.model.Categorie;
 import fr.eservices.soaring.model.Club;
 import fr.eservices.soaring.model.Epreuve;
+import fr.eservices.soaring.model.Pilote;
 import fr.eservices.soaring.model.PointPassage;
 import fr.eservices.soaring.model.Produit;
 import fr.eservices.soaring.model.Profil;
@@ -54,6 +55,17 @@ public class ModelAttributes {
 		assertHasField( k, "titre" );
 	}
 	
+	@Test public void testPilote() {
+		Class<?> k = Pilote.class;
+		assertHasField( k, "nom" );
+		assertHasField( k, "prenom" );
+		assertHasField( k, "dateNaissance" );
+		assertHasField( k, "adresse" );
+		assertHasField( k, "codePostal" );
+		assertHasField( k, "ville" );
+		assertHasField( k, "telPortable" );
+	}
+	
 	@Test public void testVol() {
 		Class<?> k = Vol.class;
 		assertHasField( k, "date" );
@@ -94,7 +106,7 @@ public class ModelAttributes {
 
 	private void assertHasField(Class<?> k, String name) {
 		for( Field f : k.getDeclaredFields() ) {
-			if ( f.getName().equals(name) ) break;
+			if ( f.getName().equals(name) ) return;
 		}
 		fail( "Class " + k.getName() + " must have field " + name );
 	}
