@@ -35,7 +35,7 @@ public class JpaAnnotations {
 	
 	@SuppressWarnings("unchecked")
 	@BeforeClass
-	public void getJpaClasses() throws ClassNotFoundException {
+	public static void getJpaClasses() throws ClassNotFoundException {
 		idAnnotation          = (Class<? extends Annotation>) Class.forName("javax.persistence.Id");
 		entityAnnotation      = (Class<? extends Annotation>) Class.forName("javax.persistence.Entity");
 		manyToOneAnnotation   = (Class<? extends Annotation>) Class.forName("javax.persistence.ManyToOne");
@@ -44,6 +44,14 @@ public class JpaAnnotations {
 		joinColumnAnnotation  = (Class<? extends Annotation>) Class.forName("javax.persistence.JoinColumn");
 		inheritanceAnnotation = (Class<? extends Annotation>) Class.forName("javax.persistence.Inheritance");
 	}
+	
+	@Test public void testPilote() {
+		Class<?> k = Pilote.class;
+		assertHasAnnotation( k, entityAnnotation );
+		assertHasNbAnnotation( k, 1, idAnnotation );
+		
+		assertHasAssociation( k, Club.class, manyToOneAnnotation );
+	}	
 	
 	@Test public void testClub() {
 		Class<?> k = Club.class;
@@ -141,23 +149,25 @@ public class JpaAnnotations {
 
 	private void assertHasAnnotation(Class<?> k, Class<?> annotation) {
 		for ( Annotation ann : k.getAnnotations() ) {
-			if ( ann.getClass() == annotation ) break;
+			if ( ann.annotationType() == annotation ) return;
 		}
 		fail( "Class " + k.getName() + " must have annotation @" + annotation.getName() );
 	}
 	
 	private void assertHasNbAnnotation(Class<?> k, int i, Class<?> annotation) {
 		int nb = 0;
-		for ( Annotation ann : k.getAnnotations() ) {
-			if ( ann.getClass() == annotation ) nb++;
+		for ( Field f : k.getDeclaredFields() ) {
+			for ( Annotation ann : f.getAnnotations() ) {
+				if ( ann.annotationType() == annotation ) nb++;
+			}
 		}
 		assertEquals("Class " + k.getName() + " must have " + i + " fiels annotated with @" + annotation.getName(), i, nb );
 	}
 	
 	private void assertHasAssociation(Class<?> k, Class<?> type, Class<? extends Annotation> annotation) {
 		for ( Field f : k.getDeclaredFields() ) {
-			if ( f.getClass() != type ) continue;
-			if ( f.getAnnotation(annotation) != null ) break;
+			if ( f.getType() != type ) continue;
+			if ( f.getAnnotation(annotation) != null ) return;
 		}
 		fail( "Class " + k.getName() + " must have association @" + annotation.getName() + " to " + type.getName() );
 	}

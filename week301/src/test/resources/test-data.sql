@@ -6,7 +6,7 @@ insert into region(id, nom) values
 (4, 'Ile-de-France');
 
 delete from club;
-insert into club(id, nom, id_region) values
+insert into club(id, nom, region_id) values
 (1, 'Lille',     1),
 (2, 'Cambrai',   1),
 (3, 'Abbeville', 1),
@@ -15,7 +15,7 @@ insert into club(id, nom, id_region) values
 (6, 'Bailleau',  4);
 
 delete from pilote;
-insert into pilote(id, prenom, nom, dateNaissance, id_club) values
+insert into pilote(id, prenom, nom, dateNaissance, club_id) values
 (1,  'Paul',      'Leroy',    '1965-02-13', 1),
 (2,  'Maxime',    'Martin',   '1982-01-23', 2),
 (3,  'Thomas',    'Durand',   '1995-10-13', 1),
@@ -37,7 +37,7 @@ insert into repas(id, 'date', heure) values
 (6, '2017-07-03', '20:30');
 
 delete from reservation;
-insert into reservation(id_repas, id_pilote, nbPersonnes) values
+insert into reservation(repas_id, pilote_id, nbPersonnes) values
 (1, 1, 2),
 (1, 3, 5),
 (1, 6, 3),
