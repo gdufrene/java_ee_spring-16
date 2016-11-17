@@ -1,9 +1,10 @@
 package test.model;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
-import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,29 +15,28 @@ public class JpaContext {
 		persistanceClass;
 		
 	@BeforeClass
-	public void setJpaClasses() throws ClassNotFoundException {
+	public static void setJpaClasses() throws ClassNotFoundException {
 		persistanceClass = Class.forName("javax.persistence.Persistence");
 	}
 
 	@Test
 	public void getPersistanceContext() throws Exception {
 		Object emf = callStatic( persistanceClass, "createEntityManagerFactory", new Object[]{"myApp"} );
-		Object em = call(emf, "createEntityManager");
-		Object tx = call(em, "getTransaction");
+		Object em = call(emf, "createEntityManager", null);
+		Object tx = call(em, "getTransaction", null);
 		assertNotNull( tx );
 	}
 
-	private Object callStatic(Class<?> k, String methodName, Object[] params) throws Exception {
+	private Object callStatic(Class<?> k, String methodName, Object[] args) throws Exception {
 		Method method = null;
-		for ( Method m : k.getDeclaredMethods() ) {
-			if ( m.getName().equals(methodName) ) {
-				method = m ;
-				break;
-			}
+		Class<?>[] argTypes = new Class<?>[ args.length ];
+		for (int i = 0; i < args.length; i++) {
+			argTypes[i] = args[i].getClass();
 		}
+		method = k.getMethod(methodName, argTypes);
 		if ( method == null ) fail("No such method "+ methodName + " on " + k.getName() );
 		try {
-			return method.invoke(null, params);
+			return method.invoke(null, args);
 		} catch( InvocationTargetException e ) {
 			throw (Exception) e.getTargetException();
 		} catch( IllegalAccessException iae ) {
@@ -45,15 +45,19 @@ public class JpaContext {
 		}
 	}
 	
-	private Object call(Object o, String methodName) throws Exception {
+	private Object call(Object o, String methodName, Object[] args) throws Exception {
 		Method method = null;
+		Class<?>[] argTypes;
 		Class<?> k = o.getClass();
-		for ( Method m : k.getDeclaredMethods() ) {
-			if ( m.getName().equals(methodName) ) {
-				method = m ;
-				break;
+		if ( args == null ) {
+			argTypes = new Class<?>[0];
+		} else { 
+			argTypes = new Class<?>[ args.length ];
+			for (int i = 0; i < args.length; i++) {
+				argTypes[i] = args[i].getClass();
 			}
 		}
+		method = k.getMethod(methodName, argTypes);
 		if ( method == null ) fail("No such method "+ methodName + " on " + k.getName() );
 		
 		try {

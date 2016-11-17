@@ -15,7 +15,9 @@ Les noms d'attribut devront obligatoirement respecter le diagramme.
 
 
 * Ajoutez une dépendance org.hibernate.javax.persistence :: hibernate-jpa-2.1-api :: 1.0.0.Final
-* Ajoutez les annotations JPA nécessaires à la gestion des entités.
+* Ajoutez les annotations JPA nécessaires à la gestion des entités.  
+Vous ajouterez des identifiants numériques nommés 'id' à vos entités quand cela est nécessaire.  
+Si vous devez spécifier des clé étrangères, nommez les "_id" précédé du nom de l'entité lié, exemple : "club_id".
 
 Le test "JpaAnnotations" devrait vous permettre de vérifier votre travail.
 
@@ -25,9 +27,9 @@ Nous utiliserons une base de données H2.
 H2 est une base compatible SQL écrite en java qui peut s'embarquer facilement et propose un modèle de persistence mémoire qui peut être intéressant pour exécuter des tests unitaires.
 
 * Ajoutez une dépendance maven vers com.h2database :: h2 :: 1.4.193  
-Cette dépendance pourra être dans le scope "runtime".
+Cette dépendance pourra être dans le scope "test".
 * Ajoutez une dépendance vers org.hibernate :: hibernate-core :: 5.2.4.Final  
-Hibernate implémente les spécification JPA 2.1.
+Hibernate implémente les spécification JPA 2.1, en scope "test" également.
 * Ecrivez le fichier META-INF/persistence.xml  et faîtes un test de chargement de contexte.  
 Le test "JpaContext" charge le persistance unit "myApp".
 
