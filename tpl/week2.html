@@ -14,7 +14,7 @@ Maven / JDBC
 <p>Suivez les consignes de la partie week201</p>
 
 <p>
-    Télécharger ce <a href="http://eservices.webpulser.com/check.jar">fichier check.jar</a>.<br/>
+    Vous utiliserez le check.jar fourni dans le projet git, pensez à le mettre à jour avec git pull.<br/>
     Installer ce jar dans votre repository local.<br/>
     Ajouter cet artefact comme dépendance dans votre pom, en scope test<br/>
 </p>
@@ -38,4 +38,13 @@ Maven / JDBC
 <p>Suivez les consignes de la partie week202</p>
 
 
+
+<div class="note">
+  <h5>Tester votre programme.</h5>
+  Exécuter la classe boot.Main avec les dépedances de test :<br/>
+  <code>
+    mvn -q exec:java -Dexec.mainClass=boot.Main -Dexec.classpathScope=test -Dexec.arguments=week202
+  </code><br/>
+  ajoutez l'option <code>-DNoProxy</code> si vous n'êtes pas sur le réseau de l'université.
+</div>
 
