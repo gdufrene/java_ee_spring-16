@@ -94,9 +94,13 @@ Hibernate est un "gros" framework qui implémente les fonctionnalités de JPA. I
 </p>
 
 <pre>
-&lt;persistence xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/persistence 
-http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd&quot; version=&quot;2.0&quot;&gt;
-&lt;persistence-unit name=&quot;myapp&quot;&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;persistence xmlns=&quot;http://xmlns.jcp.org/xml/ns/persistence&quot;
+             xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+             xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd&quot;
+             version=&quot;2.1&quot;&gt;
+&lt;persistence-unit name=&quot;myApp&quot;&gt;
 &lt;provider&gt;org.hibernate.jpa.HibernatePersistenceProvider&lt;/provider&gt;
 &lt;properties&gt;
   &lt;property name=&quot;connection.driver_class&quot;  value=&quot;org.h2.Driver&quot;/&gt;
