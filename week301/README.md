@@ -43,4 +43,9 @@ On déduira les réservations déjà effectuées par repas, évidemment.
 * Implémentez RegistrationDaoFactory, il est utilisé pour les tests.
 * Lancer RegistrationDaoTest pour vérifier votre travail.
 
+Pour que vos tests passent, j'ai constitué une base de données "type".  
+Vous trouverez ces données de test sous la forme d'un script SQL à exécuter sur votre base.  
+Il se trouve dans src/test/resources/test-data.sql  
+Pour exécuter facilement ce script, le plus simple est d'ajouter une propriété "javax.persistence.sql-load-script-source" permettant d'exécuter un script présent dans le classpath.
+
 
