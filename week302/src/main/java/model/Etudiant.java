@@ -8,4 +8,8 @@ public class Etudiant {
 
 	@Id
 	int id;
+	
+	String email;
+	
+	int age;
 }
