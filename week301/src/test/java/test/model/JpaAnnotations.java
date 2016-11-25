@@ -70,7 +70,7 @@ public class JpaAnnotations {
 	@Test public void testReservation() {
 		Class<?> k = Reservation.class;
 		assertHasAnnotation( k, entityAnnotation );
-		assertHasNbAnnotation( k, 0, idAnnotation );
+		assertHasNbAnnotation( k, 2, idAnnotation );
 		
 		assertHasAssociation( k, Pilote.class, manyToOneAnnotation );
 		assertHasAssociation( k, Pilote.class, joinColumnAnnotation );
@@ -124,7 +124,7 @@ public class JpaAnnotations {
 	@Test public void testSecteur() {
 		Class<?> k = Secteur.class;
 		assertHasAnnotation( k, entityAnnotation );
-		assertHasNbAnnotation( k, 0, idAnnotation );
+		assertHasNbAnnotation( k, 2, idAnnotation );
 		
 		assertHasAssociation( k, Epreuve.class, manyToOneAnnotation );
 		assertHasAssociation( k, Epreuve.class, joinColumnAnnotation );
