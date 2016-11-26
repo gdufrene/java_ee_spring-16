@@ -45,9 +45,12 @@ Vous allez maintenant définir le contexte spring en XML.
 
 Lorsque vous utilisez un ClassPathXmlApplicationContext comme c'est le cas dans le test XmlContextTest, par défaut, aucune annotation n'est lue/interprétée.
 
+Pour définir le bean "Application" vous devez y injecter les références (leur id) des beans définis plus haut. Le ClassPathXmlApplicationContext injecte les références uniquement avec des setter. Ainsi, si vous souhaiter injecter une propriété "greeter", il faudra un "setGreeter(...)" dans votre objet.
+
 * Complétez le fichier src/main/resources/application-context.xml
 * Définisser l'assemblage à l'aide des objets SwingWelcome, FrenchGreeter et ConsolePrinter
 * injecter ces beans dans un bean Application, également défini dans le xml
+* ajoutez les setter nécessaire à l'injection des références
 * vérifier avec le test testXmlContext
 
 
