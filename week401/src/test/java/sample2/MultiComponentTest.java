@@ -18,7 +18,7 @@ public class MultiComponentTest extends AppContextCommon {
 	@Before
 	public void initContext() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext( );
-		context.scan( "fr.eservices.sample2" );
+		context.scan( "fr.eservices.sample2.impl" );
 		context.refresh();
 		context.start();
 		
