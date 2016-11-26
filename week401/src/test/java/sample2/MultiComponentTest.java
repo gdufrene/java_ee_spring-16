@@ -3,6 +3,7 @@ package sample2;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import fr.eservices.sample2.api.Greeter;
@@ -30,19 +31,21 @@ public class MultiComponentTest extends AppContextCommon {
 	}
 	
 
-	
+	@Test
 	public void hasBasicComponents() throws Exception {
 		hasComponent( EnglishGreeter.class );
 		hasComponent( ConsoleWelcome.class );
 		hasComponent( ConsolePrinter.class );
 	}
 	
+	@Test
 	public void hasManyComponents() throws Exception {
 		hasComponents( Greeter.class, 2 );
 		hasComponents( Printer.class, 2 );
 		hasComponents( Welcome.class, 2 );
 	}
 	
+	@Test
 	public void hasProperQualifier() throws Exception {
 		hasComponentQualified("swing", Welcome.class);
 		context.getBean("console", Welcome.class);

@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import fr.eservices.sample1.Application;
@@ -28,6 +29,7 @@ public class BasicContextTest {
 		context.stop();
 	}
 	
+	@Test
 	public void testContext() throws Exception {
 		context.scan( "fr.eservices.sample1" );
 		context.refresh();

@@ -2,6 +2,7 @@ package sample2;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.eservices.sample2.api.Greeter;
@@ -24,7 +25,7 @@ public class XmlContextTest extends AppContextCommon {
 		((ClassPathXmlApplicationContext) context).stop();
 	}
 	
-
+	@Test
 	public void testXmlContext() {
 		hasComponents(Application.class, 1);
 		
