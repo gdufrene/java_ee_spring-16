@@ -4,9 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import fr.eservices.soaring.model.Club;
 import fr.eservices.soaring.model.Pilote;
-import fr.eservices.soaring.model.Region;
 import fr.eservices.soaring.model.Repas;
 
 public interface RegistrationDao {
@@ -26,7 +24,8 @@ public interface RegistrationDao {
 	
 	/**
 	 * Search for Lunch around a given day and time.  
-	 * Would return lunch from time -2H until time +2H
+	 * Would return lunch from time -2H until time +2H.  
+	 * Only return launch with at least 1 seat left.
 	 * @param day as a java Date
 	 * @param time would be a string made of HH:mm (24h format) 
 	 * @return map as Lunch -> available seats

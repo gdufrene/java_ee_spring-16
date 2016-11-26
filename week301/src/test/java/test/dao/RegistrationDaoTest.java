@@ -18,7 +18,7 @@ import fr.eservices.soaring.model.Repas;
 public class RegistrationDaoTest {
 	
 	RegistrationDao dao = RegistrationDaoFactory.createRegistrationDao();
-	SimpleDateFormat sdf = new SimpleDateFormat("YYYY-mm-dd");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Test
 	public void testFindPilotsByName_match() {
@@ -43,7 +43,7 @@ public class RegistrationDaoTest {
 		Date day = sdf.parse("2016-03-03");
 		List<Pilote> pilots = dao.findPilotsBelow(day, 34);
 		assertNotNull( pilots );
-		assertEquals(8, pilots.size());
+		assertEquals(2, pilots.size());
 	}
 	
 	@Test
