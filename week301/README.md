@@ -47,5 +47,5 @@ Pour que vos tests passent, j'ai constitué une base de données "type".
 Vous trouverez ces données de test sous la forme d'un script SQL à exécuter sur votre base.  
 Il se trouve dans src/test/resources/test-data.sql  
 Pour exécuter facilement ce script, le plus simple est d'ajouter une propriété "javax.persistence.sql-load-script-source" permettant d'exécuter un script présent dans le classpath.
-
+Cette propriété ne fonctionne qu'avec l'option "create" ou "create-drop" de la propriété "hibernate.hbm2ddl.auto".
 
