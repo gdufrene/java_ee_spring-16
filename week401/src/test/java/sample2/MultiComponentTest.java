@@ -48,13 +48,13 @@ public class MultiComponentTest extends AppContextCommon {
 	@Test
 	public void hasProperQualifier() throws Exception {
 		hasComponentQualified("swing", Welcome.class);
-		context.getBean("console", Welcome.class);
+		hasComponentQualified("console", Welcome.class);
 		
-		context.getBean("english", Greeter.class);
-		context.getBean("french", Greeter.class);
+		hasComponentQualified("english", Greeter.class);
+		hasComponentQualified("french", Greeter.class);
 		
-		context.getBean("swing", Printer.class);
-		context.getBean("console", Printer.class);
+		hasComponentQualified("swing", Printer.class);
+		hasComponentQualified("console", Printer.class);
 	}
 	
 }

@@ -33,6 +33,7 @@ Le test hasManyComponents devrait passer.
 Relancez l'application.  
 Que se passe-t-il et pourquoi ?  
 Ajouter une annotation @Qualifier avec les noms "swing" et "french" sur les objets correspondant.  
+Idem avec les qualifier "console" et "english".  
 le test hasProperQualifier devrait passer. 
 
 Vérifier qu'en plaçant les qualifier dans Application cela branche la bonne implémentation.
