@@ -51,7 +51,7 @@ public class BasicContextTest {
 		}
 		
 		for ( String s : new String[]{"greeter", "printer", "welcome"} ) {
-			Field f = Application.class.getField(s);
+			Field f = Application.class.getDeclaredField(s);
 			f.setAccessible(true);
 			Object ref = f.get(app);
 			assertNotNull( "Application Field '" + s + "' is null", ref );
