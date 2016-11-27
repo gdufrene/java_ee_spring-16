@@ -29,7 +29,9 @@
         <div class="panel-heading">Panel heading</div>
 
 
-		${message}
+		Message is : xxx
+		
+		
 	  </div>
 
 
