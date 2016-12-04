@@ -21,6 +21,7 @@ gen jdbc
 gen jpa
 gen servlet
 gen spring
+gen jstl
 
 gen week1
 gen week2

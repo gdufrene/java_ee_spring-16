@@ -118,11 +118,15 @@ Certaines injections pouvant être facultatives, vous pouvez mettre le paramètr
 </p>
 
 <p>
-  Des annotations complémentaires vont également nous permettre de manipuler facilement
-  les données provenant de la requête. Par exemple l'annotation <code class="ann">@RequestParameter</code> permettra
-  de copier automatiquement le contenu d'un paramètre dans une variable.<br>
-  Soit l'équivalent de <code>String param = request.getParameter("paramName")</code>
+<center>
+<a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/images/mvc.png">
+<img src="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/images/mvc.png" height="300">
+</a><br>
+(source : <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">documentation spring MVC</a>)
+</center>
 </p>
+
+<h3>Initialisation</h3>
 
 <p>
   Spring MVC fourni un objet "RequestDispatcher" qui est une servlet qui va aiguiller toutes les requêtes
@@ -130,6 +134,7 @@ Certaines injections pouvant être facultatives, vous pouvez mettre le paramètr
   Pour brancher cette servlet dans tomcat (ou autre), il faudra définir le pattern des URLs qui seront aiguillées vers la "RequestDispatcher" de spring. On pourra par exemple intercepter toutes les requêtes, dans notre contexte, qui commencent par "/app/", ou qui se terminent pas ".do".<br>
   Vous devez être vigilant sur les urls exposées par les controleurs et celles interceptées par spring. En effet, si vous définissez le "RequestDispatcher" sur "*.html" et qu'un controleur est exposé sur "/hello" (sans extension), le traitement n'arrivera jamais jusqu'à lui.
 </p>
+
 
 <p>
   Pour configurer le mapping de la "RequestDispatcher", cela peut se faire avec le fichier "web.xml" contenu normalement dans "WEB-INF" et définissant tous les mapping de servlet (avant les annotations). Récemment, l'API servlet 3.0 a permis de configurer le contexte web par l'extension d'une interface. Spring utilise ce mécanisme, et cherche dans le classpath une implémentation de WebApplicationInitializer pour vous permettre de préparer le contexte spring et brancher le "RequestDispatcher". Celà ressemblera à :
@@ -158,6 +163,8 @@ public class WebAppInitializer implements WebApplicationInitializer {
    <code class="ann">@ComponentScan</code> pour spécifier les packages dans lesquels chercher les composants.
 </p>
 
+<h3>Les contrôleurs</h3>
+
 <p>
   Spring cherchera à enregistrer dans le RequestDispatcher tous les composants annotés <code class="ann">@Controller</code> ou <code class="ann">@RestController</code>.<br>
   Toutes les méthodes de ces contrôleurs annotés <code class="ann">@RequestMapping</code> seront exposées, en fonction des paramètres de cette annotation (ex: uniquement sur GET ou POST).<br>
@@ -167,138 +174,73 @@ public class WebAppInitializer implements WebApplicationInitializer {
 </p>
 
 <p>
-  L'association entre le fichier de vue et la chaine de caractères retournée par vos contrôleurs se fait à l'aide d'un composant "ViewResolver". La manière la plus simple d'en changer le comportement est de créer une méthode annotée "Bean" dans l'objet de configuration (celui annoté @Configuration). Cette méthode retournera un "InternalResourceViewResolver". Cela permet d'aller charger les vues à un endroit quelconque du classpath ou du disque ...<br>
-  Voir la <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-viewresolver">documentation</a>.
+  Des annotations complémentaires vont également nous permettre de manipuler facilement
+  les données provenant de la requête. Par exemple l'annotation <code class="ann">@RequestParam</code> permettra
+  de copier automatiquement le contenu d'un paramètre dans une variable.<br>
+  Soit l'équivalent de <code>String param = request.getParameter("paramName")</code>.<br/>
+  Exemple d'une méthode de contrôleur utilisant les annotation spring web-mvc :
 </p>
 
-<center>
-<a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/images/mvc.png">
-<img src="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/images/mvc.png" height="300">
-</a><br>
-(source : <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">documentation spring MVC</a>)
-</center>
+<pre><code>
+  	@RequestMapping(value="/authors.html", method=RequestMethod.GET)
+  	public String listByName( Model model, @RequestParam("nameLike") String name ) {
+  		List&lt;Author&gt; authors = dao.findAuthorsLikeName( name );
+  		model.addAttribute("authors", authors);
+  		return "authors";
+  	}
+</code></pre>
+
+<p>
+  Si vous avez besoin d'accéder à l'objet HttpServletRequest (ou Response) il vous suffit de l'ajouter à la liste des paramètres de votre opération et spring vous le passera lors de l'invocation de la méthode.<br>
+  Il n'est pas recommandable de créer ce type de dépendance vers l'API servlet car votre contrôleur pourrait être utilisé dans un tout autre contexte que celui d'une application web. Toutefois, il est parfois nécessaire de le faire et spring vous en offre la possibilité.<br>
+  Consulter <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-ann-arguments">cette page</a> pour voir la liste des types de paramètres que spring peut vous fournir !<br>
+</p>
+
+<h3>Les vues</h3>
+
+<p>
+  La manière la plus simple d'associer une vue à un contrôleur est de lui faire retourner une chaine de caractère indiquant le fichier que la DispatcherServlet devra afficher.
+</p>
+
+<p>
+  L'association entre le fichier de vue et la chaine de caractères retournée par vos contrôleurs se fait à l'aide d'un composant "ViewResolver". Pour en changer le comportement,  créez une méthode annotée "Bean" dans l'objet de configuration (celui annoté @Configuration). Cette méthode retournera un "InternalResourceViewResolver". Cela permet d'aller charger les vues à un endroit quelconque du classpath ou du disque ...<br>
+  Voir la <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-viewresolver">documentation</a>.
+</p>
 
 <p>
   Pour des vues écrites en JSP, tous les attributs du modèle sont accessibles par <code>request.getAttribute("attrName")</code> et par <code>${attrName}</code>. Cette dernière notation utilise les "Expression Langage". N'hésitez pas à consulter <a href="http://adiguba.developpez.com/tutoriels/j2ee/jsp/el/">ce tutorial</a> pour découvrir les mécanismes de base des EL.
 </p>
+
+<h3>Ecrire des webservices REST/json</h3>
 
 <p>
   Vous serez sans doute régulièrement amené à développer des services REST renvoyant du JSON.<br>
   Avec l'annotation @ResponseBody les méthodes de @Controller ne chercheront plus à exécuter une vue et retourneront directement le résultat de votre opération, en la convertissant éventuellement.<br>
   C'est le comportement par défaut des @RestController.<br>
   Vous pourriez donc renvoyer une chaine de caractère composée de JSON écrite "à la main".<br>
-  Mais en ajoutant simplement la librairie "jackson-databind" à vos dépendances maven vous pouvez faire transformer automatiquement les objets retournés par vos contôleurs en JSON.
+  Mais en ajoutant simplement la librairie "jackson-databind" à vos dépendances maven, vous pouvez faire transformer automatiquement les objets retournés par vos contôleurs en JSON.
 </p>
 
 
-
-
-
-<h3> DAO de gestion d'une entité </h3>
+<h3>DAO</h3>
 
 <p>
-  Nous allons implémenter un DAO avec spring.<br>
-  Commencez par télécharger <a href="files/week4/sources-week4.zip">cette archive</a> dans votre projet. <br>
-  Si ce n'est pas déjà fait, modifier votre pom pour configurer maven et compiler à niveau "1.8" de java.
-  Il faudra ajouter ceci dans votre pom, à l'intérieur de la balise "build" : <br>
-</p><pre><code>&lt;plugins&gt;
-&lt;plugin&gt;
-  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-  &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-  &lt;version&gt;3.2&lt;/version&gt;
-  &lt;configuration&gt;
-    &lt;source&gt;1.8&lt;/source&gt;
-    &lt;target&gt;1.8&lt;/target&gt;
-  &lt;/configuration&gt;
-&lt;/plugin&gt;
-&lt;/plugins&gt;
-</code></pre>
-<p></p>
+  La partie "Model" de spring web-mvc n'est pas spécifique et vous pouvez l'implémenter de la manière que vous le souhaitez. Une bonne pratique reste évidemment de dissocier les DAO et de les injecter dans vos contrôleur à l'aide de "@Component" et "@Autowire".
+</p>
+
+
+<h3>Lancer tomcat avec les dépendances maven </h3>
 
 <p>
-  J'ai ajouté une classe de tests unitaires pour valider le fonctionnement de votre DAO.<br>
-  Ajouter le répertoire "WEB-INF/test" à votre pom.xml comme répertoire de source pour les tests.<br>
-  A ajouter également dans la balise "build".
-</p><pre><code>&lt;testSourceDirectory&gt;WEB-INF/test&lt;/testSourceDirectory&gt;</code></pre>
-<p></p>
-
-<p>
-  Il nous faudra aussi de nouvelle librairie pour nos tests : junit:junit en version 4.11<br>
-  Ajouter celle-ci dans les dépendances en scope "test".<br>
-  Une fois tout cela fait pensez à résoudre les dépendances et à mettre à jour le classpath d'eclipse.<br>
-  <code>mvn dependency:resolve eclipse:eclipse</code><br>
+  Il existe de nombreux plugins dans les IDE pour gérer le lancement et le rafraichissement des contextes de tomcat. Toutefois, leur comportement est parfois hasardeux et vous pourriez avoir besoin de déployer "à la main" votre projet pour vous assurer qu'il fonctionnera dans un serveur d'application web java standard.<br/>
+  Vous pouvez utiliser <code>mvn package</code> pour préparer un war à déployer. Il sera disponible dans /target.<br/>
 </p>
 
 <p>
-Observez la classe "DaoTestConfig". La configuration de l'unité de persistance y est surchargé pour persister la base en mémoire uniquement. Cela permet de travailler de manière indépendante à la base de données qui est utilisé pour faire tourner notre application web. D'autre part l'implémentation mémoire est généralement plus rapide, ce qui permettra à nos tests unitaires de s'exécuter plus vite en plus d'être isolés.
-</p>
-
-<p style="padding: 0 100px">
-  <img src="files/week4/test-dao.png" style="margin-right: 10px" align="left">
-  Lancez les tests dans eclipse, implémentez le code du Dao Jpa jusqu'à ce que tous les tests passent.<br>
-  Cela vous demandera probablement de lire ou relire la documentation de l'Entity Manager et de la manière de construire des requêtes avec JPA. (voir page précédante).
-</p>
-
-<br style="clear: both">
-
-<p>
-  Comme vous pouvez le voir notre DAO et nos tests sont indépendant de l'environnement Web/Servlet.<br>
-</p>
-
-<h3> Contrôleur de gestion d'une entité </h3>
-
-<p>
- Ecrivons maintenant un contrôleur dont le rôle sera de valider quelques règles, et de faire le lien entre les appels à une servlet et notre DAO.<br>
- Il nous faudra ajouter la dépendance vers org.springframework:spring-webmvc en version 4.1.2.RELEASE<br>
-</p>
-
-<p>
-  Ajouter une classe <b>Xxxx</b>Control dans le package "impl".<br>
-  Cette classe possèdera une propriété dao de type <b>Xxxx</b>Dao.<br>
-  Ajouter une opération "list" qui prends un "org.springframework.ui.Model" en paramètre et renvoie un "String".<br>
-  Cette opération appellera le dao pour récupérer la liste d'objets et ajoutera cette liste au model.<br>
-  L'opération renverra le nom d'une vue, par exemple "<b>xxxxList</b>".<br>
-  Avec l'aide de la <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">documentation</a>, annotez votre classe pour qu'elle soit utilisée par spring. L'opération list sera branchée sur l'URL "<b>xxxx</b>List.html".
-</p>
-
-<p>
-  Notez qu'il est aussi possible de tester ce modèle indépendamment du reste.<br>
-  Il est même possible d'injecter un DAO factice dans notre contrôleur qui renverra toujours la même liste d'objets.
-  Ainsi, le test unitaire serait simplement de vérifier qu'après l'appel à la fonction "list" le modèle un attribut correctement nommé dans le model et correspondant à la liste de nos objets...<br>
-  Ce scénario peut évidemment être beaucoup plus abouti si l'on veut vérifier que notre contrôleur respecte certaines règles "métiers" comme ne pas ajouter un objet si une propriété est null ou vide.
-</p><p>
-
-</p><h3> Vue liste des entités </h3>
-
-<p>
-  Le contexte spring fourni est configuré pour résoudre les noms de vues par des JSP présentes à la racine du projet.<br>
-  Vous pouvez regarder la classe "impl.AppConfig" et "impl.WebAppInitializer" qui permettent de paramétrer spring sans avoir à écrire de xml.<br>
-  Cette configuration peut également se faire à l'aide du fichier web.xml, d'un Listener particulier et de fichiers "applicationContext.xml".<br>
-  Toutes les requêtes à un fichier ".html" sont interceptées par SpringDispatcherServlet.
-</p>
-
-<p>
-  Regardez et adaptez la jsp fournie si besoin.
-  Le but est d'afficher dans un tableau HTML toutes les entités d'un même type venant de notre source de données.<br>
-  Au dessus du tableau un lien amènera vers un formulaire permettant d'ajouter une entité.<br>
-  Au bout de chaque ligne un lien permettra de supprimer l'entité après une confirmation (javascript).<br>
-  Un lien permettra de modifier l'entité, le lien sera posé soit sur le nom, soit sur un lien en fin de ligne.<br>
-  Le formulaire de modification peut être le même que celui de création. Trouvez un moyen de réutilisez ce formulaire.<br>
-</p>
-
-<h3> Lancer tomcat avec les dépendances maven </h3>
-
-<p>
-  Notre projet web dépend maintenant de nombreuses dépendances qu'il faudra ajouter dans le classpath de notre contexte web.<br>
-  Nous pourrions copier à la main chacun des jar disponible dans le "repository" local de maven vers WEB-INF/lib.<br>
-  Heureusement cette opération fastidieuse peut être réalisée par maven :)
-
+  Notez que vous pouvez aussi exporter l'ensemble des librairies dont dépend votre projet dans un répertoire. Cela peut être pratique si vous souhaitez packager vous même l'application par exemple.
 </p><pre><code>mvn dependency:copy-dependencies -DincludeScope=runtime -DoutputDirectory=WEB-INF/lib</code></pre>
 <p></p>
 
-<p>
-  Lancez maintenant tomcat et rendez-vous sur localhost:8080/tp1/xxxxListe.html
-</p>
 
 
       <ul class="navigation">
