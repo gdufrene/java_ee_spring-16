@@ -28,7 +28,8 @@ public class ContextTest {
 	@Before
 	public void init() {
 		ctx = new AnnotationConfigApplicationContext();
-		ctx.register(AppConfig.class);
+		ctx.register(AppTestConfig.class);
+		ctx.refresh();
 	}
 	
 	@After
@@ -98,7 +99,7 @@ public class ContextTest {
 					.getDeclaredMethod("getTime", new Class[]{})
 					.getAnnotation(RequestMapping.class)
 					.value()
-				).contains("/add")
+				).contains("/time")
 			);
 	}
 }
