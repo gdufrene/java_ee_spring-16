@@ -29,16 +29,16 @@
 
       <section>
 
-        <h2><a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Servlet - JSP.</h2>
+        <h2><a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Servlet - JSP</h2>
 
 <p>
-Une servlet est un objet java qui étends l'interface "Servlet" ou "HTTPServlet".<br/>
-Cette interface définie 2 méthodes qui sont appelées lorsque le code est chargé/arrêté par le serveur web qui "expose" ces servlets à travers une URL.<br/>
-Ces méthodes "init" et "destroy" permettent d'initialiser un certain nombre d'élément au lancement de la servlet ou de nettoyer le contexte lors de leur arrêt.<br/>
+Une servlet est un objet java qui étend l'interface "Servlet" ou "HTTPServlet".<br/>
+Cette interface définit 2 méthodes qui sont appelées lorsque le code est chargé/arrêté par le serveur web qui "expose" ces servlets à travers une URL.<br/>
+Ces méthodes "init" et "destroy" permettent d'initialiser un certain nombre d'éléments au lancement de la servlet ou de nettoyer le contexte lors de leur arrêt.<br/>
 </p>
 
 <p>
-Le serveur web va interpréter une partie de la requête HTTP envoyée par le navigateur de l'internaute et appelée une méthode de la servlet qui est responsable du traitement de cette requête.<br/>
+Le serveur web va interpréter une partie de la requête HTTP envoyée par le navigateur de l'internaute et appeler une méthode de la servlet qui est responsable du traitement de cette requête.<br/>
 </p>
 
 <center><img src="http://static.commentcamarche.net/www.commentcamarche.net/pictures/servlets-images-moteur.gif" /><br/>
@@ -62,7 +62,7 @@ Le serveur web va interpréter une partie de la requête HTTP envoyée par le na
 </p>
 
 
-<h2><a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Votre première servlet.</h2>
+<h2><a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Votre première servlet</h2>
 
 <p>
   Nous allons réaliser une première servlet très simple en essayant de "tout faire à la main".<br/>
@@ -122,7 +122,7 @@ Le serveur web va interpréter une partie de la requête HTTP envoyée par le na
 
 <p>
   Lançons notre serveur web.<br/>
-  rendez-vous dans le répertoire tomcat8/bin et exécutez <code>./catalina.sh run</code><br/>
+  Rendez vous dans le répertoire tomcat8/bin et exécutez <code>./catalina.sh run</code><br/>
   Après quelques secondes votre serveur est lancé et accessible sur "http://localhost:8080"<br/>
 </p>
 
@@ -158,14 +158,14 @@ Le serveur web va interpréter une partie de la requête HTTP envoyée par le na
     + cos(lat1) * cos(lat2) * cos(lng1-lng2)
   ) * R;
 </pre>
-  R vaut 6366 selon la norme WGS84. Attention, en JAVA, les angles doivent être données en radians pour les fonction acos, sin, cos ...<br/>
+  R vaut 6366 selon la norme WGS84. Attention, en JAVA, les angles doivent être donnés en radians pour les fonction acos, sin, cos ...<br/>
   <br/>
   Pour plus d'informations, je vous recommande la lecture de <a href="http://dotclear.placeoweb.com/post/Formule-de-calcul-entre-2-points-wgs84-pour-calculer-la-distance-qui-separe-ces-deux-points">cet article</a> qui présente différentes implémentations du problème, dont une en JAVA.
 </p>
 
 
 
-<h2>introduction aux JSP</h2>
+<h2>Introduction aux JSP</h2>
 
 <p>
 Jsp est un équivalent java des fichiers asp ou php. C'est une manière de mettre du java, exécuté coté serveur, dans une page html. Le jsp n'est pas interprété, il est en fait traduit en java puis compilé (généralement au premier appel de la page), et ensuite exécuté. C'est le résultat de cette exécution qui donne le code html renvoyé au navigateur.
@@ -179,10 +179,10 @@ Nous utiliserons "jasper" comme implémentation du moteur de jsp, il est fourni 
 
 <p>
 Afin de distinguer le code html ou javascript à donner au navigateur et le code java à éxécuter sur le serveur, nous utilisons les balises "&lt;%" et "%&gt;" pour délimiter le code java. <br/>
-Une balise particulière permet de définir des propriétés sur le type de réponse HTTP, l'encodage de la page, ou encore les imports java nécessaire pour la compilation de la page. Toutes ces directives se retrouvent entre les balises "&lt;%@" et "%&gt;". <br/>
+Une balise particulière permet de définir des propriétés sur le type de réponse HTTP, l'encodage de la page, ou encore les imports java nécessaires pour la compilation de la page. Toutes ces directives se retrouvent entre les balises "&lt;%@" et "%&gt;". <br/>
 Enfin, il est très courant de vouloir afficher le contenu d'une variable dans le html qui sera renvoyé au navigateur. Cela peut se faire en faisant un <code>&lt;% out.print( maVariable ); %&gt;</code> mais un tag a été défini pour réduire l'écriture à <code>&lt;%= maVariable %&gt;</code> qui fait exactement la même chose. <br/>
-Comme nous sommes de bon développeurs consciencieux, nous n'hésiterons également pas à utiliser le tag permettant de mettre des commentaires dans nos jsp : <code>&lt;%-- mon super commentaire qui ne sera pas compilé ou envoyé au navigateur --%&gt;</code> <br/>
-Il faut bien comprendre que la jsp va être traduite en code java. Plus précisément en une classe qui hérite de Servlet dont il sera exécuter la méthode "service". Dans certains cas il peut être utile de vouloir introduire des attributs ou des méthodes à cette classe générée et compilée.<br/> 
+Comme nous sommes de bons développeurs consciencieux, nous n'hésiterons également pas à utiliser le tag permettant de mettre des commentaires dans nos jsp : <code>&lt;%-- mon super commentaire qui ne sera pas compilé ou envoyé au navigateur --%&gt;</code> <br/>
+Il faut bien comprendre que la jsp va être traduite en code java. Plus précisément en une classe qui hérite de Servlet dont il sera exécuté la méthode "service". Dans certains cas il peut être utile de vouloir introduire des attributs ou des méthodes à cette classe générée et compilée.<br/> 
 Cela peut se faire avec le tag <code>&lt;%! private double montant; %&gt;</code>
 </p>
 
@@ -215,7 +215,7 @@ Pour rendre l'écriture de nos jsp un peu plus modulaire il est possible d'inclu
   Reprenez le contenu de <a href="https://raw.githubusercontent.com/gdufrene/java_ee_spring-13/master/102_Jsp/www/index.jsp">ce fichier</a> et mettez le dans un fichier "test.jsp", dans votre répertoire (tomcat) webapps/tp1.<br/>
   Accédez à la page http://localhost:8080/tp1/test.jsp</br>
   Le premier accès est un peu plus long car "jasper", le moteur jsp, transforme votre source jsp en source java, puis le compile et enfin il exécute ce code.<br/>
-  Pour les appels suivant, le code est simplement exécuté comme n'importe quel autre servlet.<br/>
+  Pour les appels suivants, le code est simplement exécuté comme n'importe quel autre servlet.<br/>
   Vous pouvez d'ailleurs regarder le contenu du source java généré dans le répertoire de travail de tomcat : (tomcat) work/Catalina/localhost/tp1/org/apache/jsp<br/>
   Regarder le source peut aider à comprendre une erreur qui s'est glissée dans la jsp, ou à analyser une exception relevée par le code exécuté.
 </p>
