@@ -36,7 +36,7 @@ JPA (Java Persistance Api) est une norme Java EE permettant de lier des objets �
 </p>
 
 <p>
-JPA est essentiellement utilisé pour la manipulation des bases de données relationnelles construites à partir du développement orienté objet en Java. Comme tout ORM, JPA fourni une abstraction d'accès à la base de données. Il n'est donc plus question d'écrire du code SQL "natif" de votre base. Les opérations de création, recherche, mise à jour et suppression des données sont complètement accessibles via des méthodes génériques.
+JPA est essentiellement utilisé pour la manipulation des bases de données relationnelles construites à partir du développement orienté objet en Java. Comme tout ORM, JPA fournit une abstraction d'accès à la base de données. Il n'est donc plus question d'écrire du code SQL "natif" de votre base. Les opérations de création, recherche, mise à jour et suppression des données sont complètement accessibles via des méthodes génériques.
 </p>
 
 <p>
@@ -74,7 +74,7 @@ Hibernate est un "gros" framework qui implémente les fonctionnalités de JPA. I
 
 <p>
   Pour marquer les relations entre nos entités il est possible d'utiliser les annotations :<br/>
-  &raquo; <code class="ann">@OneToMany</code> : pour désigner une relation 1-n, soit une instance faisant référence à plusieurs autre. Permet d'accéder aux objets du cotés N à travers une liste. A utiliser avec vigilance selon la volumétrie des données associées.<br/>
+  &raquo; <code class="ann">@OneToMany</code> : pour désigner une relation 1-n, soit une instance faisant référence à plusieurs autres. Permet d'accéder aux objets du cotés N à travers une liste. A utiliser avec vigilance selon la volumétrie des données associées.<br/>
   &raquo; <code class="ann">@ManyToOne</code> : pour désigner, une relation inverse de 1-n. Permet d'accéder facilement à l'objet du coté "1".<br/>
   &raquo; <code class="ann">@OneToOne</code> : pour désigner une relation 1-1 entre deux objets. Peut être utile pour séparer un ensemble de propriétés dont le sens est différent. Peut être utile pour concevoir une relation d'héritage également.<br/>
   &raquo; <code class="ann">@ManyToMany</code> : pour les relations n-n devenant une table associative.<br/>
@@ -82,15 +82,15 @@ Hibernate est un "gros" framework qui implémente les fonctionnalités de JPA. I
 
 <p>
   Certaines associations N-N du modèle peuvent comporter des informations. Dans ce cas de figure, il est préférable d'utiliser deux liens OneToMany vers une classe qui portera ces informations.<br/>
-  Pour gérer l'association correctement, il y a ensuite deux stratégie concernant la clé primaire :<br/>
+  Pour gérer l'association correctement, il y a ensuite deux stratégies concernant la clé primaire :<br/>
   1. Réaliser une clé composée à l'aide de EmbeddedId ; (Voir <a href="http://www.mkyong.com/hibernate/hibernate-many-to-many-example-join-table-extra-column-annotation/">cette explication</a>)<br/>
-  2. Ajouter une simple clé (colonne supplémentaire) et mettre une contrainte d'unicité sur les colonnes des deux clé étrangères. ; (Voir <a href="http://stackoverflow.com/questions/5127129/mapping-many-to-many-association-table-with-extra-columns">cette explication</a>)<br/>
+  2. Ajouter une simple clé (colonne supplémentaire) et mettre une contrainte d'unicité sur les colonnes des deux clés étrangères. (Voir <a href="http://stackoverflow.com/questions/5127129/mapping-many-to-many-association-table-with-extra-columns">cette explication</a>)<br/>
 </p>
 
 <h3>persistence.xml</h3>
 
 <p>
-  Si vous utilisez JPA sans autre framework (type spring), le "contexte de persistance" se configure avec un fichier "persistence.xml" placé dans le <b>classpath</b>, dans un répertoire "META-INF/". Dans un projet maven, ce fichier est généralement placé dans les "resources" principales. Donc, il vous faut créer un répertoire WEB-INF/resources/META-INF et y mettre ce contenu :</a>.<br/>
+  Si vous utilisez JPA sans autre framework (type spring), le "contexte de persistance" se configure avec un fichier "persistence.xml" placé dans le <b>classpath</b>, dans un répertoire "META-INF/". Dans un projet maven, ce fichier est généralement placé dans les "resources" principales. Donc, il vous faut créer un répertoire WEB-INF/resources/META-INF et y mettre ce contenu :</a><br/>
 </p>
 
 <pre>

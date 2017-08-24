@@ -51,7 +51,7 @@
           Comprenez que Spring est un "couteau suisse" pour faciliter la vie du développeur JAVA, spécialement si il développe pour JAVA EE (mais pas que).</p>
 
 <p>
-        Le coeur de spring est un moteur d'injection de dépendance permettant l'inversion de contrôle du cycle de vie des objets. L'IoC permet, entre autre, de "repousser" de choix d'implémentation (ou d'instance) d'un objet inclus dans un autre.
+        Le coeur de spring est un moteur d'injection de dépendance permettant l'inversion de contrôle du cycle de vie des objets. L'IoC permet, entre autre, de "repousser" le choix d'implémentation (ou d'instance) d'un objet inclus dans un autre.
 </p>
 
 <p>
@@ -83,11 +83,11 @@ Certaines injections pouvant être facultatives, vous pouvez mettre le paramètr
 </p>
 
 <p>
-  La lecture de la documentation de référence <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/beans.html">concernant les beans</a> et surtout <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/beans.html#beans-annotation-config">ce paragraphe</a> vous serons sans doute d'une aide précieuse.<br>
+  La lecture de la documentation de référence <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/beans.html">concernant les beans</a> et surtout <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/beans.html#beans-annotation-config">ce paragraphe</a> vous seront sans doute d'une aide précieuse.<br>
 </p>
 
 <p>
-  L'intérêt de spring est surtout de réaliser des scénario d'injection lorsque les objets proviennent de librairies différentes, ou lorsque plusieurs implémentations d'une même classe peuvent être utilisées dans l'application.<br>
+  L'intérêt de spring est surtout de réaliser des scénarii d'injection lorsque les objets proviennent de librairies différentes, ou lorsque plusieurs implémentations d'une même classe peuvent être utilisées dans l'application.<br>
   L'inspection des composants du classpath peut se faire dans vos packages ou ceux définis dans une autre librairie (jar).
 </p>
 
@@ -112,7 +112,7 @@ Certaines injections pouvant être facultatives, vous pouvez mettre le paramètr
 <h2>Spring MVC</h2>
 
 <p>
-  la librairie "MVC" de spring permet d'utiliser les mécanismes d'injection de dépendance pour faciliter le 
+  La librairie "MVC" de spring permet d'utiliser les mécanismes d'injection de dépendance pour faciliter le 
   branchement des différentes parties (model, vue, controller) de notre application web tout en assurant une certaine indépendance
   entre nos objets.
 </p>
@@ -129,7 +129,7 @@ Certaines injections pouvant être facultatives, vous pouvez mettre le paramètr
 <h3>Initialisation</h3>
 
 <p>
-  Spring MVC fourni un objet "RequestDispatcher" qui est une servlet qui va aiguiller toutes les requêtes
+  Spring MVC fournit un objet "RequestDispatcher" qui est une servlet qui va aiguiller toutes les requêtes
   vers l'un des contrôleurs annotés et présents dans le contexte spring.<br>
   Pour brancher cette servlet dans tomcat (ou autre), il faudra définir le pattern des URLs qui seront aiguillées vers la "RequestDispatcher" de spring. On pourra par exemple intercepter toutes les requêtes, dans notre contexte, qui commencent par "/app/", ou qui se terminent pas ".do".<br>
   Vous devez être vigilant sur les urls exposées par les controleurs et celles interceptées par spring. En effet, si vous définissez le "RequestDispatcher" sur "*.html" et qu'un controleur est exposé sur "/hello" (sans extension), le traitement n'arrivera jamais jusqu'à lui.
@@ -170,7 +170,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
   Toutes les méthodes de ces contrôleurs annotés <code class="ann">@RequestMapping</code> seront exposées, en fonction des paramètres de cette annotation (ex: uniquement sur GET ou POST).<br>
   Spring essaiera d'injecter automatiquement tous les types en paramètre de votre méthode.<br>
   Habituellement on injectera une instance de "Model" sur lequel on placera des attributs à passer dans la vue.<br>
-  Si votre méthode retourne une chaine de caractères, Spring essaiera d'afficher la vue correspondante en y injectant les attributs du modèle.<br>
+  Si votre méthode retourne une chaîne de caractères, Spring essaiera d'afficher la vue correspondante en y injectant les attributs du modèle.<br>
 </p>
 
 <p>
@@ -199,11 +199,11 @@ public class WebAppInitializer implements WebApplicationInitializer {
 <h3>Les vues</h3>
 
 <p>
-  La manière la plus simple d'associer une vue à un contrôleur est de lui faire retourner une chaine de caractère indiquant le fichier que la DispatcherServlet devra afficher.
+  La manière la plus simple d'associer une vue à un contrôleur est de lui faire retourner une chaîne de caractères indiquant le fichier que la DispatcherServlet devra afficher.
 </p>
 
 <p>
-  L'association entre le fichier de vue et la chaine de caractères retournée par vos contrôleurs se fait à l'aide d'un composant "ViewResolver". Pour en changer le comportement,  créez une méthode annotée "Bean" dans l'objet de configuration (celui annoté @Configuration). Cette méthode retournera un "InternalResourceViewResolver". Cela permet d'aller charger les vues à un endroit quelconque du classpath ou du disque ...<br>
+  L'association entre le fichier de vue et la chaîne de caractères retournée par vos contrôleurs se fait à l'aide d'un composant "ViewResolver". Pour en changer le comportement,  créez une méthode annotée "Bean" dans l'objet de configuration (celui annoté @Configuration). Cette méthode retournera un "InternalResourceViewResolver". Cela permet d'aller charger les vues à un endroit quelconque du classpath ou du disque ...<br>
   Voir la <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-viewresolver">documentation</a>.
 </p>
 
@@ -217,7 +217,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
   Vous serez sans doute régulièrement amené à développer des services REST renvoyant du JSON.<br>
   Avec l'annotation @ResponseBody les méthodes de @Controller ne chercheront plus à exécuter une vue et retourneront directement le résultat de votre opération, en la convertissant éventuellement.<br>
   C'est le comportement par défaut des @RestController.<br>
-  Vous pourriez donc renvoyer une chaine de caractère composée de JSON écrite "à la main".<br>
+  Vous pourriez donc renvoyer une chaine de caractères composée de JSON écrite "à la main".<br>
   Mais en ajoutant simplement la librairie "jackson-databind" à vos dépendances maven, vous pouvez faire transformer automatiquement les objets retournés par vos contôleurs en JSON.
 </p>
 
@@ -225,7 +225,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 <h3>DAO</h3>
 
 <p>
-  La partie "Model" de spring web-mvc n'est pas spécifique et vous pouvez l'implémenter de la manière que vous le souhaitez. Une bonne pratique reste évidemment de dissocier les DAO et de les injecter dans vos contrôleur à l'aide de "@Component" et "@Autowire".
+  La partie "Model" de spring web-mvc n'est pas spécifique et vous pouvez l'implémenter de la manière que vous le souhaitez. Une bonne pratique reste évidemment de dissocier les DAO et de les injecter dans vos contrôleurs à l'aide de "@Component" et "@Autowire".
 </p>
 
 

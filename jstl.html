@@ -39,11 +39,11 @@
 </p>
 
 <p>
-  L'implémentation de base fourni différents types de balises regroupées dans différents espaces de nommage XML. Comprenez différents module dont on identifiera le nom dans le préfixe de la balise. Il existe ainsi les tags "core" (c), les tags "xml" (x), les tags "format" (fmt) et les tags "sql" (sql).
+  L'implémentation de base fournit différents types de balises regroupées dans différents espaces de nommage XML. Comprenez différents modules dont on identifiera le nom dans le préfixe de la balise. Il existe ainsi les tags "core" (c), les tags "xml" (x), les tags "format" (fmt) et les tags "sql" (sql).
 </p>
 
 <p>
-  JSTL 1.2 offre également des facilités pour la manipulation et l'affichage des données provenant du "model". Cela va se faire par ce qui est nommé "Expression Language" (EL). Une expression est une chaine du type <code>${expression}</code>. "expression" peut simplement être le nom d'une variable du modèle ou une fonction plus aboutie fournie par EL.
+  JSTL 1.2 offre également des facilités pour la manipulation et l'affichage des données provenant du "model". Cela va se faire par ce qui est nommé "Expression Language" (EL). Une expression est une chaîne du type <code>${expression}</code>. "expression" peut simplement être le nom d'une variable du modèle ou une fonction plus aboutie fournie par EL.
 </p>
 
 <p>
@@ -55,7 +55,7 @@
 <h3> Liste des tags du "core" </h3>
 
 <p>
-  La taglib "core" fourni un ensemble de tag permettant de gérer de l'affichage et affectation de variable, des boucles, des conditions, de la création d'url en fonction du contexte, des redirections ...<br>
+  La taglib "core" fournit un ensemble de tags permettant de gérer de l'affichage et affectation de variable, des boucles, des conditions, de la création d'url en fonction du contexte, des redirections ...<br>
 </p><p>
 
 </p><p>
@@ -82,7 +82,7 @@
   <tr><td><a href="http://www.tutorialspoint.com/jsp/jstl_core_foreach_tag.htm">&lt;c:forEach &gt;</a></td>
     <td>Permet de faire une boucle sur tout ce qui est 'Iterable' ou tableaux.</td></tr>
   <tr><td><a href="http://www.tutorialspoint.com/jsp/jstl_core_foreach_tag.htm">&lt;c:forTokens&gt;</a></td>
-    <td>Boucle sur une chaine possédant un séparateur défini (exemple 'chaine1,chaine2,chaine3').</td></tr>
+    <td>Boucle sur une chaîne possédant un séparateur défini (exemple 'chaine1,chaine2,chaine3').</td></tr>
   <tr><td><a href="http://www.tutorialspoint.com/jsp/jstl_core_redirect_tag.htm">&lt;c:redirect &gt;</a></td>
     <td>Redirige l'utilisateur vers une nouvelle URL.</td></tr>
   <tr><td><a href="http://www.tutorialspoint.com/jsp/jstl_core_url_tag.htm">&lt;c:url&gt;</a></td><td>Crée une URL absolue en fonction du contexte de la servlet, avec des paramètres ou non.</td></tr>
@@ -93,7 +93,7 @@
 <p></p>
 
 <p>
-  Les autres taglibs ne devraient pas vous être utile dans le cadre de ce cours.<br>
+  Les autres taglibs ne devraient pas vous être utiles dans le cadre de ce cours.<br>
   </p><ul><li>  "xml" : permet de traiter ou requêter une structure xml
   </li><li> "format" : permet de gérer l'internationnalisation des contenus de page et des formats (date, monnaies ...)
   </li><li> "sql" : permet d'exécuter des requêtes SQL directement et facilement depuis une page JSP.<br>
@@ -130,7 +130,7 @@
     &lt;/c:choose&gt;
   </code></pre>
   Notez qu'il n'y a pas de "else" à la balise <code>&lt;c:if&gt;</code>. Nous pouvons par contre utiliser "<code>choose</code>" et "<code>otherwise</code>" comme ici.<br>
-  Pour que l'expression "<code>${author.firstname}</code>" fonctionne, il est nécessaire d'avoir un getter sur la propriété "firstname". Par convention les propriétés d'un objets sont résolue selon la norme "javabeans". Donc, il faut créer des getters sur les propriétés que vous voulez exposer dans vos vues.
+  Pour que l'expression "<code>${author.firstname}</code>" fonctionne, il est nécessaire d'avoir un getter sur la propriété "firstname". Par convention les propriétés d'un objet sont résolue selon la norme "javabeans". Donc, il faut créer des getters sur les propriétés que vous voulez exposer dans vos vues.
 <p></p>
 
 <h3> La taglib form de spring </h3>
@@ -157,7 +157,7 @@ Vous pouvez consulter la documentation dédiée aux vues spring et plus particul
 <p></p>
 
 <p>
-  Du côté de notre contrôleur il sera nécessaire de distinguer deux opérations. Une première pour traiter l'affichage du formulaire (en GET) et une deuxième pour gérer l'enregistrement des données du formulaire  (en POST) et mettre à jour les données dans la base. Quelques annotations nous serons utiles pour distinguer les deux opérations branchées sur la même URL. Une annotation <code class="ann">@PathVariable</code> nous permettra d'extraire facilement une variable depuis l'url. L'annotation <code class="ann">@ModelAttribute</code> permettra de créer un objet automatiquement à partir des données du formulaire envoyé en POST. Toutefois, pour que cela fonctionne vous devez exposer des "setter" sur les propriétés de votre model selon la convention "javabeans".<br>
+  Du côté de notre contrôleur il sera nécessaire de distinguer deux opérations. Une première pour traiter l'affichage du formulaire (en GET) et une deuxième pour gérer l'enregistrement des données du formulaire  (en POST) et mettre à jour les données dans la base. Quelques annotations nous seront utiles pour distinguer les deux opérations branchées sur la même URL. Une annotation <code class="ann">@PathVariable</code> nous permettra d'extraire facilement une variable depuis l'url. L'annotation <code class="ann">@ModelAttribute</code> permettra de créer un objet automatiquement à partir des données du formulaire envoyé en POST. Toutefois, pour que cela fonctionne vous devez exposer des "setter" sur les propriétés de votre modèle selon la convention "javabeans".<br>
   Le code du contrôleur ressemblera au final à cela :<br>
 </p><pre><code>
 	@RequestMapping(value="/author/{id}.html", method=RequestMethod.GET)
